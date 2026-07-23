@@ -3,28 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>1xBET Ultra Full Platform Prototype</title>
+  <title>1xBET Ultimate Full-Scale Prototype Platform</title>
   <style>
     :root {
-      --bg-main: #0b141f;
-      --bg-header: #132130;
-      --bg-card: #18283b;
-      --bg-hover: #20354f;
+      --bg-main: #0a1118;
+      --bg-header: #121e2b;
+      --bg-card: #172636;
+      --bg-hover: #1e3247;
       --accent-blue: #0088cc;
       --accent-yellow: #fbc531;
       --accent-green: #2ed573;
       --accent-red: #ff4757;
       --text-main: #ffffff;
       --text-muted: #8fa0b5;
-      --border-color: #223752;
+      --border-color: #21354b;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background-color: var(--bg-main); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; }
+    body { background-color: var(--bg-main); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
 
-    /* Top Utility Bar */
+    /* Top Bar */
     .top-bar {
-      background: #080f17; padding: 6px 20px; font-size: 0.8rem; color: var(--text-muted);
+      background: #060b10; padding: 6px 20px; font-size: 0.78rem; color: var(--text-muted);
       display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color);
     }
 
@@ -36,92 +36,90 @@
     .brand { font-size: 1.8rem; font-weight: 900; font-style: italic; color: #fff; cursor: pointer; }
     .brand span { color: var(--accent-blue); }
     
-    .nav-links { display: flex; gap: 10px; }
-    .nav-link { color: #fff; font-weight: 600; font-size: 0.9rem; padding: 8px 12px; border-radius: 4px; cursor: pointer; }
+    .nav-links { display: flex; gap: 8px; }
+    .nav-link { color: #fff; font-weight: 600; font-size: 0.88rem; padding: 8px 14px; border-radius: 4px; cursor: pointer; transition: 0.2s; }
     .nav-link:hover, .nav-link.active { background: var(--accent-blue); }
 
     .user-section { display: flex; align-items: center; gap: 10px; }
-    .balance-box { background: #080f17; padding: 6px 12px; border-radius: 4px; border: 1px solid var(--border-color); font-size: 0.9rem; }
+    .balance-box { background: #060b10; padding: 6px 12px; border-radius: 4px; border: 1px solid var(--border-color); font-size: 0.88rem; }
     
     .deposit-btn {
       background: var(--accent-green); color: #000; border: none; padding: 8px 14px;
-      font-weight: bold; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 5px;
+      font-weight: bold; border-radius: 4px; cursor: pointer; transition: 0.2s;
     }
+    .deposit-btn:hover { opacity: 0.9; }
 
-    /* Main Dashboard Layout */
-    .dashboard { display: grid; grid-template-columns: 200px 1fr 300px; gap: 15px; padding: 15px; flex: 1; }
+    /* Layout Grid */
+    .dashboard { display: grid; grid-template-columns: 220px 1fr 320px; gap: 15px; padding: 15px; flex: 1; }
     @media (max-width: 1024px) { .dashboard { grid-template-columns: 1fr 300px; } .sidebar { display: none; } }
     @media (max-width: 768px) { .dashboard { grid-template-columns: 1fr; } }
 
     /* Left Sidebar */
     .sidebar { background: var(--bg-header); border-radius: 6px; border: 1px solid var(--border-color); padding: 10px; }
-    .sidebar-title { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; padding: 8px; font-weight: bold; }
-    .sidebar-item { padding: 10px; border-radius: 4px; cursor: pointer; display: flex; justify-content: space-between; font-size: 0.88rem; }
+    .sidebar-title { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; padding: 8px; font-weight: bold; }
+    .sidebar-item { padding: 10px; border-radius: 4px; cursor: pointer; display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 2px; }
     .sidebar-item:hover { background: var(--bg-hover); }
 
-    /* Center Content Views */
+    /* Content Panels */
     .view-panel { display: none; }
     .view-panel.active { display: block; }
 
-    /* Sports Cards & Match Tracker */
-    .match-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 6px; padding: 15px; margin-bottom: 12px; }
-    .live-tracker { background: #080f17; padding: 10px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-left: 3px solid var(--accent-red); }
-    .score-badge { font-size: 1.2rem; font-weight: bold; color: var(--accent-yellow); }
+    /* Matches UI & Real-Time Flashes */
+    .match-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 6px; padding: 15px; margin-bottom: 12px; position: relative; }
+    .live-header { background: #060b10; padding: 8px 12px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-left: 3px solid var(--accent-red); }
+    .event-alert { background: var(--accent-yellow); color: #000; font-size: 0.75rem; font-weight: bold; padding: 2px 8px; border-radius: 10px; animation: pulse 1s infinite; }
     
-    .odds-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 10px; }
-    .odd-box { background: #0e1a29; border: 1px solid var(--border-color); padding: 8px; border-radius: 4px; text-align: center; cursor: pointer; }
-    .odd-box:hover { border-color: var(--accent-blue); background: var(--bg-hover); }
-    .odd-val { font-weight: bold; color: var(--accent-green); display: block; margin-top: 2px; }
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-    /* Aviator & Casino Styles */
+    .odds-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 10px; }
+    .odd-box { background: #0c1724; border: 1px solid var(--border-color); padding: 8px; border-radius: 4px; text-align: center; cursor: pointer; transition: all 0.3s ease; }
+    .odd-box:hover { border-color: var(--accent-blue); background: var(--bg-hover); }
+    .odd-box.selected { border-color: var(--accent-yellow); background: rgba(251, 197, 49, 0.15); }
+    .odd-val { font-weight: bold; color: var(--accent-green); display: block; margin-top: 2px; }
+    
+    .odd-up { background-color: rgba(46, 213, 115, 0.3) !important; }
+    .odd-down { background-color: rgba(255, 71, 87, 0.3) !important; }
+
+    /* Aviator Graphics Engine */
     .aviator-wrapper { background: var(--bg-header); border: 1px solid var(--border-color); border-radius: 6px; padding: 15px; text-align: center; }
     .mult-history { display: flex; gap: 5px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 10px; }
-    .hist-chip { background: #080f17; border: 1px solid var(--border-color); padding: 3px 8px; border-radius: 12px; font-size: 0.75rem; color: var(--accent-blue); font-weight: bold; }
+    .hist-chip { background: #060b10; border: 1px solid var(--border-color); padding: 3px 8px; border-radius: 12px; font-size: 0.75rem; color: var(--accent-blue); font-weight: bold; }
     
-    .aviator-screen { background: #050a12; height: 220px; border-radius: 8px; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; border: 1px solid var(--border-color); margin-bottom: 15px; }
-    .plane { position: absolute; font-size: 2.2rem; bottom: 20px; left: 20px; transition: all 0.1s linear; }
+    .canvas-container { position: relative; width: 100%; height: 280px; background: #04080e; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 15px; overflow: hidden; }
+    canvas { width: 100%; height: 100%; display: block; }
+    .multiplier-overlay { position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); font-size: 3.8rem; font-weight: 900; color: var(--accent-green); text-shadow: 0 0 15px rgba(0,0,0,0.9); }
 
-    /* Casino Games Grid */
-    .casino-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
-    .casino-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 6px; height: 110px; display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 0.9rem; font-weight: bold; cursor: pointer; text-align: center; padding: 5px; }
-    .casino-card:hover { border-color: var(--accent-blue); transform: translateY(-2px); }
+    /* Controls & Auto-Cashout Inputs */
+    .control-panel { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; align-items: center; background: #070e17; padding: 12px; border-radius: 6px; border: 1px solid var(--border-color); }
+    .form-input { padding: 8px 10px; background: #04080e; border: 1px solid var(--border-color); color: #fff; border-radius: 4px; font-weight: bold; }
+    .action-btn { background: var(--accent-green); color: #000; border: none; padding: 10px 20px; font-weight: bold; border-radius: 4px; cursor: pointer; }
 
-    /* Modal / Pop-up (Deposit Portal) */
-    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 1000; }
-    .modal-card { background: var(--bg-header); border: 1px solid var(--border-color); width: 90%; max-width: 500px; border-radius: 8px; padding: 20px; position: relative; }
-    .modal-close { position: absolute; right: 15px; top: 15px; font-size: 1.2rem; cursor: pointer; color: var(--text-muted); }
-    
-    .pay-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 15px 0; }
-    .pay-card { background: #080f17; border: 1px solid var(--border-color); padding: 10px; border-radius: 6px; text-align: center; cursor: pointer; font-size: 0.8rem; }
-    .pay-card.active { border-color: var(--accent-green); background: var(--bg-hover); }
-
-    /* Forms & Buttons */
-    .form-input { width: 100%; padding: 10px; background: #080f17; border: 1px solid var(--border-color); color: #fff; border-radius: 4px; margin: 5px 0 10px 0; }
-    .action-btn { width: 100%; background: var(--accent-green); color: #000; border: none; padding: 10px; font-weight: bold; border-radius: 4px; cursor: pointer; }
-    .action-btn:hover { opacity: 0.9; }
-
-    /* Right Sidebar */
+    /* Bet Slip Sidebar */
     .panel-box { background: var(--bg-header); border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; margin-bottom: 12px; }
-    .panel-header { font-weight: bold; font-size: 0.9rem; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-bottom: 10px; }
+    .panel-header { font-weight: bold; font-size: 0.9rem; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; }
+    .slip-item { background: #08101a; border: 1px solid var(--border-color); padding: 8px; border-radius: 4px; margin-bottom: 6px; font-size: 0.82rem; }
     .history-item { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border-color); font-size: 0.8rem; }
+
+    /* Deposit Modal */
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 1000; }
+    .modal-card { background: var(--bg-header); border: 1px solid var(--border-color); width: 90%; max-width: 450px; border-radius: 8px; padding: 20px; position: relative; }
   </style>
 </head>
 <body>
 
-  <!-- Top bar -->
+  <!-- Top Utilities -->
   <div class="top-bar">
     <span>🌐 Language: Sinhala | UTC+05:30</span>
-    <span>🔒 SSL Secured | 24/7 Agent Support</span>
+    <span>🔊 Audio Status: <strong style="color:var(--accent-green);">Engine Ready</strong></span>
   </div>
 
   <!-- Navbar -->
   <header class="navbar">
-    <div class="brand">1x<span>BET</span> <small style="font-size:0.4em; color:#fff;">PROTOTYPE</small></div>
+    <div class="brand">1x<span>BET</span> <small style="font-size:0.4em; color:#fff;">ULTIMATE PRO</small></div>
     
     <nav class="nav-links">
       <span class="nav-link active" onclick="switchView('sports', this)">🏏 Sports Live</span>
-      <span class="nav-link" onclick="switchView('aviator', this)">✈️ Aviator</span>
-      <span class="nav-link" onclick="switchView('casino', this)">🎰 Casino</span>
+      <span class="nav-link" onclick="switchView('aviator', this)">✈️ Aviator Pro</span>
     </nav>
 
     <div class="user-section">
@@ -132,304 +130,464 @@
     </div>
   </header>
 
-  <!-- Dashboard -->
+  <!-- Main Dashboard -->
   <div class="dashboard">
 
-    <!-- Left Sidebar -->
+    <!-- Left Sports Navigation -->
     <aside class="sidebar">
-      <div class="sidebar-title">Sports List</div>
-      <div class="sidebar-item">🏏 Cricket <span>(14)</span></div>
-      <div class="sidebar-item">⚽ Football <span>(38)</span></div>
-      <div class="sidebar-item">🎾 Tennis <span>(9)</span></div>
-      <div class="sidebar-item">🏀 Basketball <span>(12)</span></div>
-      <div class="sidebar-item">🎮 E-Sports <span>(19)</span></div>
+      <div class="sidebar-title">Live Markets</div>
+      <div class="sidebar-item">🏏 Cricket Live <span>(2)</span></div>
+      <div class="sidebar-item">⚽ Football Live <span>(1)</span></div>
+      <div class="sidebar-item">🎾 Tennis Championship <span>(5)</span></div>
+      <div class="sidebar-item">🏀 NBA Live <span>(3)</span></div>
+      <div class="sidebar-item">🎮 CS:GO / Dota 2 <span>(8)</span></div>
     </aside>
 
-    <!-- Main Content Panel -->
+    <!-- Center Content Panel -->
     <main>
 
-      <!-- View 1: Sports Section -->
+      <!-- Sports Section View -->
       <div id="view-sports" class="view-panel active">
         
-        <!-- Live Match 1 -->
+        <!-- Cricket Match 1 -->
         <div class="match-card">
-          <div class="live-tracker">
+          <div class="live-header">
             <div>
-              <span style="color:var(--accent-red); font-weight:bold;">● LIVE</span> T20 World Cup
+              <span style="color:var(--accent-red); font-weight:bold;">● LIVE</span> T20 World Cup Final
             </div>
-            <div class="score-badge">SL 142/4 (16.2 ov)</div>
+            <div id="cricket-alert" class="event-alert" style="display:none;">EVENT</div>
+            <div style="font-weight:bold; color:var(--accent-yellow);" id="cricket-score">SL 142/4 (16.2 ov)</div>
           </div>
           <div style="font-weight:bold; font-size:1.05rem;">Sri Lanka vs India</div>
+          <div style="font-size:0.75rem; color:var(--text-muted); margin-top:3px;">CRR: 8.71 | Req RR: 10.25</div>
+          
           <div class="odds-grid">
-            <div class="odd-box" onclick="selectOdd('Sri Lanka (T20)', 2.10)">
-              <span style="font-size:0.75rem; color:var(--text-muted);">W1 (Sri Lanka)</span>
-              <span class="odd-val">2.10</span>
+            <div class="odd-box" id="box-sl" onclick="toggleBetSelection('Sri Lanka (T20)', 'odd-sl', this)">
+              <span style="font-size:0.72rem; color:var(--text-muted);">W1 (Sri Lanka)</span>
+              <span class="odd-val" id="odd-sl">2.10</span>
             </div>
-            <div class="odd-box" onclick="selectOdd('Draw (T20)', 15.00)">
-              <span style="font-size:0.75rem; color:var(--text-muted);">Draw</span>
-              <span class="odd-val">15.00</span>
+            <div class="odd-box" id="box-draw" onclick="toggleBetSelection('Draw (T20)', 'odd-draw', this)">
+              <span style="font-size:0.72rem; color:var(--text-muted);">Draw</span>
+              <span class="odd-val" id="odd-draw">15.00</span>
             </div>
-            <div class="odd-box" onclick="selectOdd('India (T20)', 1.75)">
-              <span style="font-size:0.75rem; color:var(--text-muted);">W2 (India)</span>
-              <span class="odd-val">1.75</span>
+            <div class="odd-box" id="box-ind" onclick="toggleBetSelection('India (T20)', 'odd-ind', this)">
+              <span style="font-size:0.72rem; color:var(--text-muted);">W2 (India)</span>
+              <span class="odd-val" id="odd-ind">1.75</span>
             </div>
           </div>
         </div>
 
-        <!-- Live Match 2 -->
+        <!-- Football Match 2 -->
         <div class="match-card">
-          <div class="live-tracker">
+          <div class="live-header">
             <div>
-              <span style="color:var(--accent-red); font-weight:bold;">● LIVE</span> UEFA Champions League
+              <span style="color:var(--accent-red); font-weight:bold;">● LIVE</span> Champions League
             </div>
-            <div class="score-badge">1 - 0 (65')</div>
+            <div id="football-alert" class="event-alert" style="display:none;">GOAL!</div>
+            <div style="font-weight:bold; color:var(--accent-yellow);" id="football-score">Real 1 - 0 Barca (65')</div>
           </div>
           <div style="font-weight:bold; font-size:1.05rem;">Real Madrid vs Barcelona</div>
+          <div style="font-size:0.75rem; color:var(--text-muted); margin-top:3px;">Possession: Real 54% - 46% Barca</div>
+
           <div class="odds-grid">
-            <div class="odd-box" onclick="selectOdd('Real Madrid', 1.45)">
-              <span style="font-size:0.75rem; color:var(--text-muted);">W1 (Real)</span>
-              <span class="odd-val">1.45</span>
+            <div class="odd-box" id="box-real" onclick="toggleBetSelection('Real Madrid', 'odd-real', this)">
+              <span style="font-size:0.72rem; color:var(--text-muted);">W1 (Real)</span>
+              <span class="odd-val" id="odd-real">1.45</span>
             </div>
-            <div class="odd-box" onclick="selectOdd('Draw (El Clasico)', 3.80)">
-              <span style="font-size:0.75rem; color:var(--text-muted);">Draw</span>
-              <span class="odd-val">3.80</span>
+            <div class="odd-box" id="box-fdraw" onclick="toggleBetSelection('Draw (El Clasico)', 'odd-fdraw', this)">
+              <span style="font-size:0.72rem; color:var(--text-muted);">Draw</span>
+              <span class="odd-val" id="odd-fdraw">3.80</span>
             </div>
-            <div class="odd-box" onclick="selectOdd('Barcelona', 5.20)">
-              <span style="font-size:0.75rem; color:var(--text-muted);">W2 (Barca)</span>
-              <span class="odd-val">5.20</span>
+            <div class="odd-box" id="box-barca" onclick="toggleBetSelection('Barcelona', 'odd-barca', this)">
+              <span style="font-size:0.72rem; color:var(--text-muted);">W2 (Barca)</span>
+              <span class="odd-val" id="odd-barca">5.20</span>
             </div>
           </div>
         </div>
 
       </div>
 
-      <!-- View 2: Aviator Crash Game -->
+      <!-- Aviator Canvas Engine View -->
       <div id="view-aviator" class="view-panel">
         <div class="aviator-wrapper">
-          <div class="mult-history">
+          <div class="mult-history" id="aviator-history-bar">
             <span class="hist-chip">1.24x</span>
             <span class="hist-chip">3.50x</span>
             <span class="hist-chip">1.05x</span>
             <span class="hist-chip">12.40x</span>
-            <span class="hist-chip">2.10x</span>
           </div>
-          <div class="aviator-screen">
-            <div id="plane-icon" class="plane">✈️</div>
-            <div id="crash-mult" style="font-size:3.5rem; font-weight:900; color:var(--accent-green);">1.00x</div>
-          </div>
-          <div style="display:flex; gap:10px; justify-content:center;">
-            <input type="number" id="aviator-stake" class="form-input" value="10" style="width:110px; margin:0;">
-            <button id="btn-aviator-start" class="action-btn" style="width:auto; padding:10px 20px;" onclick="runAviator()">Bet Start</button>
-            <button id="btn-aviator-cashout" class="action-btn" style="width:auto; padding:10px 20px; background:var(--accent-yellow); display:none;" onclick="cashoutAviator()">Cash Out</button>
-          </div>
-        </div>
-      </div>
 
-      <!-- View 3: Live Casino -->
-      <div id="view-casino" class="view-panel">
-        <div class="casino-grid">
-          <div class="casino-card" onclick="alert('Roulette Table Opening...')">🎡 Live Roulette</div>
-          <div class="casino-card" onclick="alert('Blackjack Table Opening...')">🃏 Blackjack Live</div>
-          <div class="casino-card" onclick="alert('Crazy Time Opening...')">🎪 Crazy Time</div>
-          <div class="casino-card" onclick="alert('Sweet Bonanza Opening...')">🎰 Sweet Bonanza</div>
-          <div class="casino-card" onclick="alert('Gates of Olympus Opening...')">⚡ Gates of Olympus</div>
-          <div class="casino-card" onclick="alert('Baccarat Table Opening...')">🎴 Live Baccarat</div>
+          <div class="canvas-container">
+            <canvas id="aviatorCanvas"></canvas>
+            <div id="crash-mult" class="multiplier-overlay">1.00x</div>
+          </div>
+
+          <div class="control-panel">
+            <div>
+              <label style="font-size:0.75rem; display:block;">Bet ($):</label>
+              <input type="number" id="aviator-stake" class="form-input" value="10" style="width:80px;">
+            </div>
+            <div>
+              <label style="font-size:0.75rem; display:block;">Auto Cashout (x):</label>
+              <input type="number" id="aviator-auto-mult" class="form-input" value="2.00" step="0.10" style="width:90px;">
+            </div>
+            <button id="btn-aviator-start" class="action-btn" onclick="startAviatorCanvas()">Bet Start</button>
+            <button id="btn-aviator-cashout" class="action-btn" style="background:var(--accent-yellow); display:none;" onclick="cashoutAviatorCanvas()">Cash Out</button>
+          </div>
         </div>
       </div>
 
     </main>
 
-    <!-- Right Sidebar (Bet Slip & History) -->
+    <!-- Right Sidebar (Multi-Bet Slip & Stats) -->
     <aside>
       <div class="panel-box">
-        <div class="panel-header">🎟️ Bet Slip</div>
-        <div id="slip-empty" style="font-size:0.85rem; color:var(--text-muted);">Odds එකක් තෝරන්න.</div>
-        
-        <div id="slip-content" style="display:none;">
-          <div id="slip-target" style="font-size:0.9rem; font-weight:bold;">-</div>
-          <div style="font-size:0.8rem; color:var(--accent-green); margin: 4px 0;">Odds: <span id="slip-rate">0.00</span></div>
-          <input type="number" id="stake-input" class="form-input" value="10" oninput="recalcWin()">
-          <div style="font-size:0.85rem; margin-bottom:10px;">
-            දිනිය හැකි මුදල: $<span id="win-val" style="color:var(--accent-green); font-weight:bold;">0.00</span>
+        <div class="panel-header">
+          <span>🎟️ Bet Slip</span>
+          <span id="slip-count" style="color:var(--accent-yellow); font-size:0.8rem;">(0 Selections)</span>
+        </div>
+
+        <div id="slip-container">
+          <div id="slip-empty" style="font-size:0.82rem; color:var(--text-muted); text-align:center; padding:10px;">Odds තෝරා Multi-Bet සකස් කරන්න.</div>
+        </div>
+
+        <div id="slip-summary" style="display:none; margin-top:10px; border-top:1px solid var(--border-color); padding-top:10px;">
+          <div style="font-size:0.8rem; display:flex; justify-content:space-between; margin-bottom:5px;">
+            <span>එකතු වූ Odds:</span>
+            <span id="total-odds-val" style="color:var(--accent-green); font-weight:bold;">1.00</span>
           </div>
-          <button class="action-btn" onclick="submitBet()">Bet එක තබන්න</button>
+          <input type="number" id="multi-stake" class="form-input" value="10" placeholder="Stake $" style="width:100%; margin-bottom:8px;" oninput="calcMultiWin()">
+          <div style="font-size:0.82rem; margin-bottom:10px;">
+            දිනිය හැකි මුළු මුදල: $<span id="multi-win-val" style="color:var(--accent-green); font-weight:bold;">0.00</span>
+          </div>
+          <button class="action-btn" style="width:100%;" onclick="submitMultiBet()">Bet එක තබන්න</button>
         </div>
       </div>
 
       <div class="panel-box">
-        <div class="panel-header">📜 Bet History</div>
+        <div class="panel-header">📜 History Logs</div>
         <div id="history-box"></div>
       </div>
     </aside>
 
   </div>
 
-  <!-- Cash Deposit Portal Modal -->
+  <!-- Deposit Modal -->
   <div id="deposit-modal" class="modal-overlay">
     <div class="modal-card">
-      <span class="modal-close" onclick="closeDepositModal()">&times;</span>
-      <h3>💳 Deposit Cash (තැන්පතු)</h3>
-      <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">මාරු කිරීමට අවශ්‍ය ක්‍රමය තෝරන්න:</p>
-
-      <div class="pay-methods">
-        <div class="pay-card active" onclick="setPayMethod('Bank Transfer', this)">
-          🏦 Bank Transfer<br><small>Commercial/HNB</small>
-        </div>
-        <div class="pay-card" onclick="setPayMethod('USDT Crypto', this)">
-          🪙 Crypto<br><small>USDT (TRC20)</small>
-        </div>
-        <div class="pay-card" onclick="setPayMethod('e-Wallet', this)">
-          👛 e-Wallet<br><small>Skrill / Neteller</small>
-        </div>
-      </div>
-
-      <label style="font-size:0.85rem;">තැන්පත් කරන මුදල ($):</label>
-      <input type="number" id="dep-amount" class="form-input" value="50" min="5">
-
-      <div id="bank-details-box" style="background:#080f17; padding:10px; border-radius:4px; font-size:0.8rem; margin-bottom:10px;">
-        <strong>ගිණුම් විස්තර:</strong><br>
-        Bank: Commercial Bank PLC<br>
-        Acc No: 8009238491<br>
-        Name: MegaBet Pvt Ltd
-      </div>
-
-      <button class="action-btn" onclick="confirmDeposit()">Deposit එක තහවුරු කරන්න</button>
+      <span style="position:absolute; right:15px; top:15px; cursor:pointer;" onclick="closeDepositModal()">&times;</span>
+      <h3>💳 Quick Deposit Portal</h3>
+      <br>
+      <label style="font-size:0.85rem;">තැන්පතු මුදල ($):</label>
+      <input type="number" id="dep-amount" class="form-input" value="100" style="width:100%; margin-top:5px; margin-bottom:15px;">
+      <button class="action-btn" style="width:100%;" onclick="confirmDeposit()">Deposit එක තහවුරු කරන්න</button>
     </div>
   </div>
 
   <script>
-    let balance = 100.00;
-    let selectedOddsVal = 0;
-    let selectedTargetName = "";
-    let selectedPayMethod = "Bank Transfer";
+    // --- WEB AUDIO FX ENGINE ---
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    
+    function playBeepSound(freq, duration, type='sine') {
+      try {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch(e){}
+    }
 
-    // Navigation Logic
+    function playWinSound() { playBeepSound(587.33, 0.1); setTimeout(()=>playBeepSound(880, 0.3), 100); }
+    function playCrashSound() { playBeepSound(130, 0.4, 'sawtooth'); }
+
+    // --- STATE MANAGEMENT ---
+    let balance = 100.00;
+    let selectedBets = []; // Multi-bet array
+
     function switchView(viewName, el) {
       document.querySelectorAll('.view-panel').forEach(v => v.classList.remove('active'));
       document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-      
       document.getElementById('view-' + viewName).classList.add('active');
       el.classList.add('active');
+      if(viewName === 'aviator') resizeCanvas();
     }
 
-    // Modal Controls
     function openDepositModal() { document.getElementById('deposit-modal').style.display = 'flex'; }
     function closeDepositModal() { document.getElementById('deposit-modal').style.display = 'none'; }
+    function confirmDeposit() {
+      const amt = parseFloat(document.getElementById('dep-amount').value);
+      if(amt > 0) { balance += amt; updateBalanceUI(); closeDepositModal(); playWinSound(); alert("Deposit Successful!"); }
+    }
 
-    function setPayMethod(method, el) {
-      selectedPayMethod = method;
-      document.querySelectorAll('.pay-card').forEach(c => c.classList.remove('active'));
-      el.classList.add('active');
+    // --- AUTO LIVE MATCH ENGINE ---
+    let runs = 142, wickets = 4, overs = 16, balls = 2;
+    let footballMin = 65, realGoals = 1, barcaGoals = 0;
 
-      const infoBox = document.getElementById('bank-details-box');
-      if(method === 'USDT Crypto') {
-        infoBox.innerHTML = `<strong>Crypto TRC20 Address:</strong><br><span style="color:var(--accent-yellow)">TX9z2kL1M8nP...aB3c4D</span>`;
-      } else if(method === 'e-Wallet') {
-        infoBox.innerHTML = `<strong>e-Wallet Merchant ID:</strong><br>pay@megabet-demo.com`;
-      } else {
-        infoBox.innerHTML = `<strong>ගිණුම් විස්තර:</strong><br>Bank: Commercial Bank PLC<br>Acc No: 8009238491<br>Name: MegaBet Pvt Ltd`;
+    setInterval(() => {
+      // Cricket Update
+      balls++;
+      if(balls >= 6) { balls = 0; overs++; }
+      const randRun = [0, 1, 2, 4, 6][Math.floor(Math.random() * 5)];
+      runs += randRun;
+      
+      if(randRun === 4 || randRun === 6) {
+        triggerEventAlert('cricket-alert', randRun === 6 ? 'SIX!' : 'FOUR!');
+      }
+      if(Math.random() < 0.08 && wickets < 10) { wickets++; triggerEventAlert('cricket-alert', 'WICKET!'); }
+      document.getElementById('cricket-score').innerText = `SL ${runs}/${wickets} (${overs}.${balls} ov)`;
+
+      updateOddsWithFlash('odd-sl', 'box-sl', (2.10 + (Math.random() * 0.2 - 0.1)).toFixed(2));
+      updateOddsWithFlash('odd-ind', 'box-ind', (1.75 + (Math.random() * 0.2 - 0.1)).toFixed(2));
+
+      // Football Update
+      if(Math.random() < 0.4) footballMin++;
+      if(Math.random() < 0.03) { realGoals++; triggerEventAlert('football-alert', 'GOAL!'); }
+      if(Math.random() < 0.02) { barcaGoals++; triggerEventAlert('football-alert', 'GOAL!'); }
+
+      document.getElementById('football-score').innerText = `Real ${realGoals} - ${barcaGoals} Barca (${footballMin}')`;
+      updateOddsWithFlash('odd-real', 'box-real', (1.45 + (Math.random() * 0.1 - 0.05)).toFixed(2));
+      updateOddsWithFlash('odd-barca', 'box-barca', (5.20 + (Math.random() * 0.3 - 0.15)).toFixed(2));
+
+    }, 3000);
+
+    function triggerEventAlert(elementId, text) {
+      const el = document.getElementById(elementId);
+      el.innerText = text;
+      el.style.display = 'inline-block';
+      playBeepSound(440, 0.15);
+      setTimeout(() => el.style.display = 'none', 2000);
+    }
+
+    function updateOddsWithFlash(oddId, boxId, newVal) {
+      const el = document.getElementById(oddId);
+      const box = document.getElementById(boxId);
+      const oldVal = parseFloat(el.innerText);
+      const currentVal = parseFloat(newVal);
+
+      if(currentVal !== oldVal) {
+        el.innerText = newVal;
+        box.classList.add(currentVal > oldVal ? 'odd-up' : 'odd-down');
+        setTimeout(() => box.classList.remove('odd-up', 'odd-down'), 1000);
+        
+        // Update slip if exists
+        const idx = selectedBets.findIndex(b => b.oddId === oddId);
+        if(idx !== -1) {
+          selectedBets[idx].rate = currentVal;
+          renderBetSlip();
+        }
       }
     }
 
-    function confirmDeposit() {
-      const amt = parseFloat(document.getElementById('dep-amount').value);
-      if(!amt || amt <= 0) { alert("වලංගු මුදලක් ඇතුළත් කරන්න."); return; }
+    // --- MULTI-BET SLIP ENGINE ---
+    function toggleBetSelection(name, oddId, el) {
+      const rate = parseFloat(document.getElementById(oddId).innerText);
+      const existingIndex = selectedBets.findIndex(b => b.oddId === oddId);
 
-      balance += amt;
-      updateUI();
-      closeDepositModal();
-      alert(`$${amt.toFixed(2)} ක් ${selectedPayMethod} හරහා තැන්පත් කිරීම සාර්ථකයි!`);
+      if(existingIndex !== -1) {
+        selectedBets.splice(existingIndex, 1);
+        el.classList.remove('selected');
+      } else {
+        selectedBets.push({ name, oddId, rate });
+        el.classList.add('selected');
+      }
+      renderBetSlip();
     }
 
-    // Odds & Bet Slip Logic
-    function selectOdd(target, rate) {
-      selectedTargetName = target;
-      selectedOddsVal = rate;
-      document.getElementById('slip-empty').style.display = 'none';
-      document.getElementById('slip-content').style.display = 'block';
-      document.getElementById('slip-target').innerText = target;
-      document.getElementById('slip-rate').innerText = rate.toFixed(2);
-      recalcWin();
+    function renderBetSlip() {
+      const container = document.getElementById('slip-container');
+      const emptyMsg = document.getElementById('slip-empty');
+      const summary = document.getElementById('slip-summary');
+
+      if(selectedBets.length === 0) {
+        container.innerHTML = '';
+        container.appendChild(emptyMsg);
+        summary.style.display = 'none';
+        document.getElementById('slip-count').innerText = '(0 Selections)';
+        return;
+      }
+
+      emptyMsg.remove();
+      container.innerHTML = '';
+      document.getElementById('slip-count').innerText = `(${selectedBets.length} Selections)`;
+
+      selectedBets.forEach((b, i) => {
+        const item = document.createElement('div');
+        item.className = 'slip-item';
+        item.innerHTML = `
+          <div style="display:flex; justify-content:space-between;">
+            <strong>${b.name}</strong>
+            <span style="color:var(--accent-red); cursor:pointer;" onclick="removeBet(${i})">&times;</span>
+          </div>
+          <div style="color:var(--accent-green); font-size:0.78rem;">Rate: ${b.rate.toFixed(2)}</div>
+        `;
+        container.appendChild(item);
+      });
+
+      summary.style.display = 'block';
+      calcMultiWin();
     }
 
-    function recalcWin() {
-      const stake = parseFloat(document.getElementById('stake-input').value) || 0;
-      document.getElementById('win-val').innerText = (stake * selectedOddsVal).toFixed(2);
+    function removeBet(index) {
+      const removed = selectedBets.splice(index, 1)[0];
+      const box = document.getElementById(removed.oddId).parentElement;
+      box.classList.remove('selected');
+      renderBetSlip();
     }
 
-    function submitBet() {
-      const stake = parseFloat(document.getElementById('stake-input').value);
+    function calcMultiWin() {
+      const totalOdds = selectedBets.reduce((acc, b) => acc * b.rate, 1);
+      document.getElementById('total-odds-val').innerText = totalOdds.toFixed(2);
+      const stake = parseFloat(document.getElementById('multi-stake').value) || 0;
+      document.getElementById('multi-win-val').innerText = (stake * totalOdds).toFixed(2);
+    }
+
+    function submitMultiBet() {
+      const stake = parseFloat(document.getElementById('multi-stake').value);
       if (stake > balance) { alert("ප්‍රමාණවත් ශේෂයක් නොමැත!"); return; }
 
       balance -= stake;
-      updateUI();
-      addHistory(selectedTargetName, stake, "Pending");
-      alert("Bet එක සාර්ථකව තබන ලදී!");
+      updateBalanceUI();
+      addHistory(`Combo (${selectedBets.length} Bets)`, stake, "Pending");
+      playWinSound();
+      alert("Multi-Bet එක සාර්ථකව තබන ලදී!");
     }
 
-    // Aviator Engine
-    let aviatorTimer;
-    let currentMult = 1.00;
-    let crashLimit = 0;
-    let currentStake = 0;
+    // --- ADVANCED CANVAS AVIATOR GRAPHICS ENGINE ---
+    const canvas = document.getElementById('aviatorCanvas');
+    const ctx = canvas.getContext('2d');
+    let aviatorAnimation;
+    let canvasMult = 1.00;
+    let canvasCrashPoint = 0;
+    let isAviatorRunning = false;
+    let aviatorStakeAmt = 0;
+    let particles = [];
 
-    function runAviator() {
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+    }
+
+    function startAviatorCanvas() {
       const stake = parseFloat(document.getElementById('aviator-stake').value);
-      if (stake > balance) { alert("ප්‍රමාණවත් ශේෂයක් නැත!"); return; }
+      if(stake > balance) { alert("ප්‍රමාණවත් ශේෂයක් නැත!"); return; }
 
       balance -= stake;
-      currentStake = stake;
-      updateUI();
+      aviatorStakeAmt = stake;
+      updateBalanceUI();
 
-      currentMult = 1.00;
-      crashLimit = (Math.random() * 3.2 + 1.1).toFixed(2);
+      isAviatorRunning = true;
+      canvasMult = 1.00;
+      canvasCrashPoint = (Math.random() * 3.8 + 1.1).toFixed(2);
+      particles = [];
 
       document.getElementById('btn-aviator-start').style.display = 'none';
       document.getElementById('btn-aviator-cashout').style.display = 'inline-block';
+      document.getElementById('crash-mult').style.color = "var(--accent-green)";
 
-      const plane = document.getElementById('plane-icon');
+      const startTime = performance.now();
 
-      aviatorTimer = setInterval(() => {
-        currentMult += 0.02;
-        document.getElementById('crash-mult').innerText = currentMult.toFixed(2) + "x";
+      function animate(time) {
+        if(!isAviatorRunning) return;
 
-        plane.style.left = Math.min((currentMult - 1) * 70, 200) + "px";
-        plane.style.bottom = Math.min((currentMult - 1) * 35, 130) + "px";
+        const elapsedTime = (time - startTime) / 1000;
+        canvasMult = 1.00 + (elapsedTime * 0.25) + Math.pow(elapsedTime, 1.8) * 0.05;
+        document.getElementById('crash-mult').innerText = canvasMult.toFixed(2) + "x";
 
-        if (currentMult >= crashLimit) {
-          clearInterval(aviatorTimer);
+        // Auto Cashout Logic
+        const autoVal = parseFloat(document.getElementById('aviator-auto-mult').value);
+        if(autoVal > 1 && canvasMult >= autoVal) {
+          cashoutAviatorCanvas();
+          return;
+        }
+
+        // Render Canvas
+        ctx.fillStyle = '#04080e';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const currentX = Math.min((canvasMult - 1) * (canvas.width / 3.5), canvas.width - 50);
+        const currentY = canvas.height - Math.min((canvasMult - 1) * (canvas.height / 3.5), canvas.height - 50);
+
+        // Add Smoke Particles
+        particles.push({ x: currentX, y: currentY, radius: Math.random()*4+2, alpha: 1 });
+
+        // Draw Line Curve
+        ctx.beginPath();
+        ctx.moveTo(0, canvas.height);
+        ctx.quadraticCurveTo(currentX / 2, canvas.height, currentX, currentY);
+        ctx.strokeStyle = '#ff4757';
+        ctx.lineWidth = 4;
+        ctx.stroke();
+
+        // Render Particles
+        particles.forEach((p, idx) => {
+          p.alpha -= 0.02;
+          p.x -= 1;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI*2);
+          ctx.fillStyle = `rgba(255, 71, 87, ${p.alpha})`;
+          ctx.fill();
+          if(p.alpha <= 0) particles.splice(idx, 1);
+        });
+
+        // Draw Jet
+        ctx.font = '28px serif';
+        ctx.fillText('✈️', currentX - 10, currentY + 10);
+
+        if(canvasMult >= canvasCrashPoint) {
+          isAviatorRunning = false;
+          playCrashSound();
           document.getElementById('crash-mult').style.color = "var(--accent-red)";
           document.getElementById('crash-mult').innerText = "FLEW AWAY!";
           
           document.getElementById('btn-aviator-start').style.display = 'inline-block';
           document.getElementById('btn-aviator-cashout').style.display = 'none';
 
-          addHistory("Aviator (" + crashLimit + "x)", currentStake, "Lost");
-
-          setTimeout(() => {
-            document.getElementById('crash-mult').style.color = "var(--accent-green)";
-            plane.style.left = "20px"; plane.style.bottom = "20px";
-            document.getElementById('crash-mult').innerText = "1.00x";
-          }, 1500);
+          pushAviatorHistory(canvasCrashPoint + "x");
+          addHistory("Aviator (" + canvasCrashPoint + "x)", aviatorStakeAmt, "Lost");
+          return;
         }
-      }, 80);
+
+        aviatorAnimation = requestAnimationFrame(animate);
+      }
+
+      resizeCanvas();
+      requestAnimationFrame(animate);
     }
 
-    function cashoutAviator() {
-      clearInterval(aviatorTimer);
-      const win = currentStake * currentMult;
-      balance += win;
-      updateUI();
+    function cashoutAviatorCanvas() {
+      if(!isAviatorRunning) return;
+      isAviatorRunning = false;
+      cancelAnimationFrame(aviatorAnimation);
+
+      const winAmt = aviatorStakeAmt * canvasMult;
+      balance += winAmt;
+      updateBalanceUI();
+      playWinSound();
 
       document.getElementById('btn-aviator-start').style.display = 'inline-block';
       document.getElementById('btn-aviator-cashout').style.display = 'none';
 
-      addHistory("Aviator (" + currentMult.toFixed(2) + "x)", currentStake, "Won");
-      alert("$" + win.toFixed(2) + " ක් Cash Out කරන ලදී!");
+      pushAviatorHistory(canvasMult.toFixed(2) + "x");
+      addHistory("Aviator (" + canvasMult.toFixed(2) + "x)", aviatorStakeAmt, "Won");
+      alert("$" + winAmt.toFixed(2) + " ක් Cash Out කරන ලදී!");
     }
 
-    // Helper functions
-    function updateUI() { document.getElementById('user-balance').innerText = balance.toFixed(2); }
+    function pushAviatorHistory(val) {
+      const bar = document.getElementById('aviator-history-bar');
+      const chip = document.createElement('span');
+      chip.className = 'hist-chip';
+      chip.innerText = val;
+      bar.prepend(chip);
+    }
+
+    function updateBalanceUI() { document.getElementById('user-balance').innerText = balance.toFixed(2); }
 
     function addHistory(name, stake, status) {
       const box = document.getElementById('history-box');
