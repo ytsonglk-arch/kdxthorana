@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>1xStyle Betting Platform Demo</title>
+  <title>1xStyle Betting & Crash Game Demo</title>
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
     body {
-      background-color: #0f1c2e; /* 1xbet dark blue background */
+      background-color: #0f1c2e;
       color: #ffffff;
     }
 
@@ -28,29 +28,18 @@
     }
 
     .brand {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 900;
       font-style: italic;
-      color: #ffffff;
-      letter-spacing: 1px;
     }
 
-    .brand span {
-      color: #0088cc; /* 1xbet signature blue */
-    }
-
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
+    .brand span { color: #0088cc; }
 
     .balance-badge {
       background-color: #0b1420;
       padding: 8px 14px;
       border-radius: 4px;
       border: 1px solid #1e3554;
-      font-size: 0.95rem;
     }
 
     .balance-amount {
@@ -58,14 +47,27 @@
       font-weight: bold;
     }
 
-    .deposit-btn {
-      background-color: #fbc531; /* Yellow action button */
-      color: #000;
+    /* Navigation Tabs */
+    .nav-tabs {
+      display: flex;
+      background: #14243b;
+      padding: 0 20px;
+      border-bottom: 1px solid #203759;
+    }
+
+    .tab-btn {
+      background: none;
       border: none;
-      padding: 8px 16px;
+      color: #8fa0b5;
+      padding: 12px 20px;
       font-weight: bold;
-      border-radius: 4px;
       cursor: pointer;
+      border-bottom: 3px solid transparent;
+    }
+
+    .tab-btn.active {
+      color: #0088cc;
+      border-bottom-color: #0088cc;
     }
 
     /* Main Container Grid */
@@ -80,67 +82,27 @@
 
     @media (min-width: 850px) {
       .layout-grid {
-        grid-template-columns: 3fr 1fr;
+        grid-template-columns: 2.5fr 1fr;
       }
     }
 
-    /* Sports / Live Section Header */
-    .section-title {
-      background: #14243b;
-      padding: 12px 15px;
-      border-radius: 6px 6px 0 0;
-      font-size: 1rem;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border-left: 4px solid #0088cc;
-    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
     /* Match Box UI */
     .match-box {
       background: #182a45;
-      border-radius: 0 0 6px 6px;
+      border-radius: 6px;
       padding: 15px;
       margin-bottom: 15px;
       border: 1px solid #203759;
     }
 
-    .match-header {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.85rem;
-      color: #8fa0b5;
-      margin-bottom: 10px;
-    }
-
-    .live-tag {
-      background-color: #e74c3c;
-      color: #fff;
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-weight: bold;
-      font-size: 0.75rem;
-      animation: blink 1.5s infinite;
-    }
-
-    @keyframes blink {
-      0% { opacity: 1; }
-      50% { opacity: 0.4; }
-      100% { opacity: 1; }
-    }
-
-    .teams-container {
-      font-size: 1.1rem;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-
-    /* Odds Table Grid */
     .odds-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
+      margin-top: 10px;
     }
 
     .odd-card {
@@ -150,276 +112,344 @@
       border-radius: 4px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.2s;
     }
 
-    .odd-card:hover {
-      border-color: #0088cc;
-      background-color: #142a4a;
+    .odd-card:hover { border-color: #0088cc; }
+    .odd-card.selected { background-color: #0088cc; }
+
+    /* Aviator / Crash Game Styles */
+    .crash-card {
+      background: #14243b;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid #203759;
     }
 
-    .odd-card.selected {
-      background-color: #0088cc;
-      border-color: #00aaff;
+    .display-screen {
+      background: #09111c;
+      height: 220px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #1e3554;
+      margin-bottom: 15px;
     }
 
-    .odd-label {
-      display: block;
-      font-size: 0.8rem;
-      color: #8fa0b5;
-    }
-
-    .odd-card.selected .odd-label {
-      color: #e0e0e0;
-    }
-
-    .odd-value {
-      display: block;
-      font-size: 1.1rem;
-      font-weight: bold;
+    .multiplier-text {
+      font-size: 3.5rem;
+      font-weight: 900;
       color: #2ed573;
-      margin-top: 3px;
     }
 
-    .odd-card.selected .odd-value {
-      color: #fff;
+    .plane-icon {
+      font-size: 2.5rem;
+      position: absolute;
+      transition: all 0.1s linear;
+      bottom: 20px;
+      left: 10px;
     }
 
-    /* Right Side Coupon / Bet Slip */
-    .bet-slip-panel {
+    .crash-controls {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .btn-action {
+      background-color: #2ed573;
+      color: #0b1420;
+      border: none;
+      padding: 12px 20px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-cashout {
+      background-color: #fbc531;
+      color: #000;
+    }
+
+    /* Right Side Panels */
+    .side-panel {
       background-color: #14243b;
       border-radius: 6px;
       border: 1px solid #203759;
-      height: fit-content;
+      padding: 15px;
+      margin-bottom: 15px;
     }
 
-    .slip-title {
-      background-color: #182a45;
-      padding: 12px;
+    .panel-title {
       font-weight: bold;
       font-size: 1rem;
+      margin-bottom: 10px;
       border-bottom: 1px solid #203759;
-      border-radius: 6px 6px 0 0;
+      padding-bottom: 8px;
     }
 
-    .slip-body {
-      padding: 15px;
+    /* Bet History Table */
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
     }
 
-    .empty-msg {
-      color: #8fa0b5;
-      font-size: 0.9rem;
-      text-align: center;
-      padding: 20px 0;
+    .history-table th, .history-table td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #203759;
     }
 
-    .slip-detail-box {
-      background: #0e1929;
-      padding: 10px;
-      border-radius: 4px;
-      margin-bottom: 15px;
-      border-left: 3px solid #0088cc;
-    }
+    .status-won { color: #2ed573; font-weight: bold; }
+    .status-lost { color: #e74c3c; font-weight: bold; }
+    .status-pending { color: #fbc531; font-weight: bold; }
 
     .stake-input {
       width: 100%;
       padding: 10px;
-      background-color: #0b1420;
+      background: #0b1420;
       border: 1px solid #233d63;
       color: #fff;
       border-radius: 4px;
-      font-size: 1rem;
-      margin-top: 5px;
-      margin-bottom: 12px;
-    }
-
-    .stake-input:focus {
-      outline: none;
-      border-color: #0088cc;
-    }
-
-    .return-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.95rem;
-      margin-bottom: 15px;
-    }
-
-    .return-amount {
-      color: #2ed573;
-      font-weight: bold;
-    }
-
-    .place-bet-btn {
-      width: 100%;
-      background-color: #2ed573;
-      color: #0b1420;
-      border: none;
-      padding: 12px;
-      font-weight: bold;
-      font-size: 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .place-bet-btn:hover {
-      background-color: #25be63;
-    }
-
-    .place-bet-btn:disabled {
-      background-color: #2c3e50;
-      color: #7f8c8d;
-      cursor: not-allowed;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Navigation Bar -->
+  <!-- Top Navigation -->
   <nav class="navbar">
-    <div class="brand">1x<span>BET</span> <small style="font-size:0.5em; color:#fff;">DEMO</small></div>
-    <div class="user-info">
-      <div class="balance-badge">
-        ශේෂය: $<span id="user-balance" class="balance-amount">100.00</span>
-      </div>
-      <button class="deposit-btn" onclick="addDemoFunds()">+ Deposit</button>
+    <div class="brand">1x<span>BET</span> DEMO</div>
+    <div class="balance-badge">
+      ශේෂය: $<span id="user-balance" class="balance-amount">100.00</span>
     </div>
   </nav>
 
-  <!-- Main Content Layout -->
+  <!-- Navigation Tabs -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('sports')">🏏 Sports Live</button>
+    <button class="tab-btn" onclick="switchTab('aviator')">✈️ Aviator (Crash Game)</button>
+  </div>
+
+  <!-- Main Layout -->
   <div class="layout-grid">
     
-    <!-- Left Column: Matches -->
+    <!-- Left Column: Content Screens -->
     <div>
-      <div class="section-title">
-        <span class="live-tag">LIVE</span> සජීවී තරග (Cricket)
+      <!-- TAB 1: Sports Betting -->
+      <div id="tab-sports" class="tab-content active">
+        <div class="match-box">
+          <div style="font-size:0.85rem; color:#8fa0b5;">ICC T20 Series (LIVE)</div>
+          <div style="font-size:1.1rem; font-weight:bold; margin: 5px 0;">Sri Lanka vs India</div>
+          <div class="odds-row">
+            <div class="odd-card" id="odd-sl" onclick="selectSportsOdd('Sri Lanka', 2.20, 'odd-sl')">
+              <div>W1 (SL)</div>
+              <strong style="color:#2ed573;">2.20</strong>
+            </div>
+            <div class="odd-card" id="odd-ind" onclick="selectSportsOdd('India', 1.65, 'odd-ind')">
+              <div>W2 (IND)</div>
+              <strong style="color:#2ed573;">1.65</strong>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="match-box">
-        <div class="match-header">
-          <span>ICC T20 World Cup</span>
-          <span>Overs: 14.2</span>
-        </div>
-        
-        <div class="teams-container">
-          Sri Lanka vs India
-        </div>
+      <!-- TAB 2: Aviator / Crash Game -->
+      <div id="tab-aviator" class="tab-content">
+        <div class="crash-card">
+          <h2>✈️ Aviator Demo</h2>
+          <br>
+          <div class="display-screen">
+            <div id="plane" class="plane-icon">✈️</div>
+            <div id="crash-multiplier" class="multiplier-text">1.00x</div>
+            <div id="crash-status" style="color:#e74c3c; font-weight:bold; height:20px;"></div>
+          </div>
 
-        <div class="odds-row">
-          <div class="odd-card" id="odd-1" onclick="selectOdd('Sri Lanka', 2.25, 'odd-1')">
-            <span class="odd-label">W1 (Sri Lanka)</span>
-            <span class="odd-value">2.25</span>
-          </div>
-          <div class="odd-card" id="odd-x" onclick="selectOdd('Draw', 15.00, 'odd-x')">
-            <span class="odd-label">X (Draw)</span>
-            <span class="odd-value">15.00</span>
-          </div>
-          <div class="odd-card" id="odd-2" onclick="selectOdd('India', 1.65, 'odd-2')">
-            <span class="odd-label">W2 (India)</span>
-            <span class="odd-value">1.65</span>
+          <div class="crash-controls">
+            <input type="number" id="crash-stake" class="stake-input" value="10" style="width:120px; margin:0;" placeholder="Bet මුදල">
+            <button id="btn-start-crash" class="btn-action" onclick="startAviatorGame()">Bet කර Start කරන්න</button>
+            <button id="btn-cashout" class="btn-action btn-cashout" style="display:none;" onclick="cashoutAviator()">Cash Out ($<span id="cashout-val">0.00</span>)</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Right Column: Bet Slip / Coupon -->
-    <div class="bet-slip-panel">
-      <div class="slip-title">📄 BET SLIP</div>
-      <div class="slip-body">
-        
-        <div id="empty-slip" class="empty-msg">
-          Bet එකක් තැබීමට Odds එකක් තෝරන්න.
+    <!-- Right Column: Bet Slip & Bet History -->
+    <div>
+      <!-- Sports Bet Slip -->
+      <div class="side-panel">
+        <div class="panel-title">🎟️ Bet Slip</div>
+        <div id="slip-empty" style="color:#8fa0b5; font-size:0.9rem;">Odds එකක් තෝරන්න.</div>
+        <div id="slip-active" style="display:none;">
+          <div id="slip-team" style="font-weight:bold;">-</div>
+          <div style="font-size:0.85rem; color:#2ed573; margin-bottom:10px;">Odds: <span id="slip-odds">0.00</span></div>
+          <input type="number" id="sports-stake" class="stake-input" value="10" oninput="updateSportsReturn()">
+          <div style="font-size:0.9rem; margin-bottom:10px;">දිනිය හැක්කේ: $<span id="sports-win" style="color:#2ed573; font-weight:bold;">0.00</span></div>
+          <button class="btn-action" style="width:100%;" onclick="placeSportsBet()">Bet එක තබන්න</button>
         </div>
+      </div>
 
-        <form id="slip-form" style="display: none;" onsubmit="confirmBet(event)">
-          <div class="slip-detail-box">
-            <div style="font-size: 0.85rem; color: #8fa0b5;">තෝරාගැනීම:</div>
-            <div id="slip-team" style="font-weight: bold; margin-top: 2px;">-</div>
-            <div style="font-size: 0.85rem; color: #2ed573; margin-top: 5px;">
-              Odds: <span id="slip-odds" style="font-weight: bold;">0.00</span>
-            </div>
-          </div>
-
-          <label style="font-size: 0.85rem; color: #8fa0b5;">Bet ප්‍රමාණය ($):</label>
-          <input type="number" id="stake-amount" class="stake-input" value="10" min="1" step="any" oninput="calculateReturn()">
-
-          <div class="return-row">
-            <span>දිනිය හැකි මුදල:</span>
-            <span class="return-amount">$<span id="potential-win">0.00</span></span>
-          </div>
-
-          <button type="submit" id="submit-btn" class="place-bet-btn">BET එක තබන්න</button>
-        </form>
-
+      <!-- Bet History Section -->
+      <div class="side-panel">
+        <div class="panel-title">📜 තැබූ Bets (History)</div>
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>තෝරාගැනීම</th>
+              <th>ගණන</th>
+              <th>තත්ත්වය</th>
+            </tr>
+          </thead>
+          <tbody id="history-rows">
+            <!-- Dynamic Bet rows go here -->
+          </tbody>
+        </table>
       </div>
     </div>
 
   </div>
 
   <script>
-    let userBalance = 100.00;
-    let activeOdds = 0;
-    let activeTeam = "";
+    let balance = 100.00;
+    let selectedTeam = "";
+    let selectedOdds = 0;
 
-    function selectOdd(team, odds, elementId) {
-      activeTeam = team;
-      activeOdds = odds;
-
-      // Remove active state from all odds cards
-      document.querySelectorAll('.odd-card').forEach(card => card.classList.remove('selected'));
+    // Navigation Tab Control
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
       
-      // Highlight selected odd card
+      event.target.classList.add('active');
+      document.getElementById('tab-' + tabName).classList.add('active');
+    }
+
+    // --- Sports Betting Logic ---
+    function selectSportsOdd(team, odds, elementId) {
+      selectedTeam = team;
+      selectedOdds = odds;
+
+      document.querySelectorAll('.odd-card').forEach(card => card.classList.remove('selected'));
       document.getElementById(elementId).classList.add('selected');
 
-      // Update Bet Slip
-      document.getElementById('empty-slip').style.display = 'none';
-      document.getElementById('slip-form').style.display = 'block';
-
+      document.getElementById('slip-empty').style.display = 'none';
+      document.getElementById('slip-active').style.display = 'block';
       document.getElementById('slip-team').innerText = team;
       document.getElementById('slip-odds').innerText = odds.toFixed(2);
-
-      calculateReturn();
+      updateSportsReturn();
     }
 
-    function calculateReturn() {
-      const stake = parseFloat(document.getElementById('stake-amount').value) || 0;
-      const win = stake * activeOdds;
-      document.getElementById('potential-win').innerText = win.toFixed(2);
-
-      const submitBtn = document.getElementById('submit-btn');
-      if (stake <= 0 || stake > userBalance) {
-        submitBtn.disabled = true;
-      } else {
-        submitBtn.disabled = false;
-      }
+    function updateSportsReturn() {
+      const stake = parseFloat(document.getElementById('sports-stake').value) || 0;
+      document.getElementById('sports-win').innerText = (stake * selectedOdds).toFixed(2);
     }
 
-    function confirmBet(e) {
-      e.preventDefault();
-      const stake = parseFloat(document.getElementById('stake-amount').value);
+    function placeSportsBet() {
+      const stake = parseFloat(document.getElementById('sports-stake').value);
+      if (stake > balance) { alert("ප්‍රමාණවත් මුදලක් නැත!"); return; }
 
-      if (stake > userBalance) {
-        alert("ඔබගේ ගිණුමේ ප්‍රමාණවත් මුදලක් නොමැත!");
-        return;
-      }
+      balance -= stake;
+      updateBalance();
 
-      userBalance -= stake;
-      document.getElementById('user-balance').innerText = userBalance.toFixed(2);
-
-      alert(`සාර්ථකයි! $${stake.toFixed(2)} ක Bet එකක් ${activeTeam} වෙනුවෙන් තබන ලදී.`);
-
-      // Reset Slip
-      document.getElementById('slip-form').style.display = 'none';
-      document.getElementById('empty-slip').style.display = 'block';
-      document.querySelectorAll('.odd-card').forEach(card => card.classList.remove('selected'));
-
-      activeOdds = 0;
-      activeTeam = "";
+      addBetHistory(selectedTeam, stake, "Pending");
+      alert("Bet එක සාර්ථකයි!");
     }
 
-    function addDemoFunds() {
-      userBalance += 50.00;
-      document.getElementById('user-balance').innerText = userBalance.toFixed(2);
+    // --- Aviator / Crash Game Logic ---
+    let crashInterval;
+    let currentMultiplier = 1.00;
+    let crashPoint = 0;
+    let currentAviatorStake = 0;
+    let inGame = false;
+
+    function startAviatorGame() {
+      const stake = parseFloat(document.getElementById('crash-stake').value);
+      if (stake > balance) { alert("ප්‍රමාණවත් මුදලක් නැත!"); return; }
+
+      balance -= stake;
+      currentAviatorStake = stake;
+      updateBalance();
+
+      inGame = true;
+      currentMultiplier = 1.00;
+      crashPoint = (Math.random() * 4 + 1.1).toFixed(2); // Random crash between 1.1x and 5.1x
+
+      document.getElementById('crash-status').innerText = "";
+      document.getElementById('btn-start-crash').style.display = 'none';
+      document.getElementById('btn-cashout').style.display = 'inline-block';
+
+      const plane = document.getElementById('plane');
+
+      crashInterval = setInterval(() => {
+        currentMultiplier += 0.03;
+        document.getElementById('crash-multiplier').innerText = currentMultiplier.toFixed(2) + "x";
+        document.getElementById('cashout-val').innerText = (currentAviatorStake * currentMultiplier).toFixed(2);
+
+        // Plane Animation
+        plane.style.left = Math.min((currentMultiplier - 1) * 60, 200) + "px";
+        plane.style.bottom = Math.min((currentMultiplier - 1) * 40, 120) + "px";
+
+        if (currentMultiplier >= crashPoint) {
+          // Crashed
+          clearInterval(crashInterval);
+          inGame = false;
+          document.getElementById('crash-multiplier').style.color = "#e74c3c";
+          document.getElementById('crash-status').innerText = "FLEW AWAY! (CRASHED)";
+          
+          document.getElementById('btn-start-crash').style.display = 'inline-block';
+          document.getElementById('btn-cashout').style.display = 'none';
+          
+          addBetHistory("Aviator (" + crashPoint + "x)", currentAviatorStake, "Lost");
+          
+          setTimeout(() => {
+            document.getElementById('crash-multiplier').style.color = "#2ed573";
+            plane.style.left = "10px";
+            plane.style.bottom = "20px";
+          }, 1500);
+        }
+      }, 100);
+    }
+
+    function cashoutAviator() {
+      if (!inGame) return;
+      clearInterval(crashInterval);
+      inGame = false;
+
+      const winAmount = currentAviatorStake * currentMultiplier;
+      balance += winAmount;
+      updateBalance();
+
+      document.getElementById('crash-status').innerText = "CASHED OUT: $" + winAmount.toFixed(2);
+      document.getElementById('btn-start-crash').style.display = 'inline-block';
+      document.getElementById('btn-cashout').style.display = 'none';
+
+      addBetHistory("Aviator (" + currentMultiplier.toFixed(2) + "x)", currentAviatorStake, "Won");
+    }
+
+    // --- Helper Functions ---
+    function updateBalance() {
+      document.getElementById('user-balance').innerText = balance.toFixed(2);
+    }
+
+    function addBetHistory(name, stake, status) {
+      const tbody = document.getElementById('history-rows');
+      const row = document.createElement('tr');
+
+      let statusClass = "status-pending";
+      if (status === "Won") statusClass = "status-won";
+      if (status === "Lost") statusClass = "status-lost";
+
+      row.innerHTML = `
+        <td>${name}</td>
+        <td>$${stake.toFixed(2)}</td>
+        <td class="${statusClass}">${status}</td>
+      `;
+      tbody.prepend(row);
     }
   </script>
 </body>
