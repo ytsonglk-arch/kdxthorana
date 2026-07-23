@@ -1,140 +1,56 @@
 <!DOCTYPE html>
 <html lang="si">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-  <title>KDX Team | Digital Vesak Thorana</title>
-
-  <meta name="description" content="KDX Team Digital Vesak Thorana 2026">
-
-  <link rel="stylesheet" href="style.css">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sports Betting Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #0e1e2e; color: #fff; margin: 0; padding: 20px; }
+    .header { display: flex; justify-content: space-between; background: #1a2c3d; padding: 15px; border-radius: 8px; }
+    .balance { color: #00ff66; font-weight: bold; }
+    .match-card { background: #152535; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid #23374d; }
+    .match-title { font-size: 1.1em; color: #f1c40f; margin-bottom: 10px; }
+    .odds-container { display: flex; gap: 10px; }
+    .odd-btn { flex: 1; background: #23374d; border: none; color: #fff; padding: 12px; border-radius: 5px; cursor: pointer; transition: 0.2s; }
+    .odd-btn:hover { background: #0088cc; }
+    .odd-btn span { display: block; color: #00ff66; font-size: 1.2em; font-weight: bold; }
+    .bet-slip { background: #1a2c3d; margin-top: 20px; padding: 15px; border-radius: 8px; }
+    input[type="number"] { width: 100px; padding: 8px; border-radius: 4px; border: none; }
+    button.place-bet { background: #28a745; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; }
+  </style>
 </head>
-
 <body>
 
-<div class="stars"></div>
-
-<header>
-
-  <div class="logo-area">
-    <h1 class="logo glow-text">KDX TEAM</h1>
-    <p class="tagline">Digital Vesak Thorana 2026</p>
+  <div class="header">
+    <h2>🔥 MegaBet Sports</h2>
+    <div class="balance">ගිණුමේ ශේෂය: $<span id="user-balance">100.00</span></div>
   </div>
 
-</header>
-
-<section class="thorana-section">
-
-  <div class="thorana">
-
-    <!-- LED Rings -->
-
-    <div class="ring ring1"></div>
-    <div class="ring ring2"></div>
-    <div class="ring ring3"></div>
-
-    <!-- Decorative Bulbs -->
-
-    <div class="bulb bulb1"></div>
-    <div class="bulb bulb2"></div>
-    <div class="bulb bulb3"></div>
-    <div class="bulb bulb4"></div>
-    <div class="bulb bulb5"></div>
-    <div class="bulb bulb6"></div>
-
-    <!-- Story Frame -->
-
-    <div class="story-frame">
-
-      <div class="slide active">
-
-        <img src="assets/images/slide1.jpg" alt="Slide 1">
-
-        <div class="caption">
-          <h2>බුදු දහමේ ආලෝකය</h2>
-
-          <p>
-            කරුණාව, මෛත්‍රිය සහ සදාචාරය තුළින්
-            ලෝකය ආලෝකවත් කරමු.
-          </p>
-        </div>
-
-      </div>
-
-      <div class="slide">
-
-        <img src="assets/images/slide2.jpg" alt="Slide 2">
-
-        <div class="caption">
-          <h2>මෛත්‍රියේ බලය</h2>
-
-          <p>
-            වෛරය වෛරයෙන් නොව,
-            ආදරයෙන් පමණක් නිවෙයි.
-          </p>
-        </div>
-
-      </div>
-
-      <div class="slide">
-
-        <img src="assets/images/slide3.jpg" alt="Slide 3">
-
-        <div class="caption">
-          <h2>සදාචාරයේ මග</h2>
-
-          <p>
-            සත්‍යය හා යහපත
-            මිනිසාගේ සැබෑ ශක්තියයි.
-          </p>
-        </div>
-
-      </div>
-
+  <!-- Live Match Card -->
+  <div class="match-card">
+    <div class="match-title">🏏 T20 World Cup: Sri Lanka vs India (LIVE)</div>
+    <div class="odds-container">
+      <button class="odd-btn" onclick="selectOdds('Sri Lanka', 2.10)">
+        Sri Lanka දිනයි <span>2.10</span>
+      </button>
+      <button class="odd-btn" onclick="selectOdds('India', 1.75)">
+        India දිනයි <span>1.75</span>
+      </button>
     </div>
-
-    <!-- Controls -->
-
-    <div class="controls">
-
-      <button onclick="prevSlide()">⮜</button>
-      <button onclick="nextSlide()">⮞</button>
-
-    </div>
-
   </div>
 
-</section>
+  <!-- Bet Slip -->
+  <div class="bet-slip">
+    <h3>🎟️ Bet Slip</h3>
+    <p id="selected-team">කරුණාකර තෝරාගැනීමක් කරන්න.</p>
+    <div id="bet-controls" style="display:none;">
+      <label>මුදල ($): </label>
+      <input type="number" id="bet-amount" value="10" oninput="calculatePayout()">
+      <p>දිනිය හැකි මුදල: <strong style="color:#00ff66;">$<span id="possible-payout">0.00</span></strong></p>
+      <button class="place-bet" onclick="placeBet()">Bet එක තබන්න</button>
+    </div>
+  </div>
 
-<footer>
-
-  <p>
-    © 2026 KDX Team | All Rights Reserved
-  </p>
-
-</footer>
-
-<!-- Background Audio -->
-
-<audio autoplay loop id="bgMusic">
-
-  <source src="assets/audio/vesak.mp3" type="audio/mp3">
-
-</audio>
-
-<!-- Music Button -->
-
-<button class="music-btn" onclick="toggleMusic()">
-
-  🔊
-
-</button>
-
-<script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>
