@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>1xBET Advanced Frontend Prototype</title>
+  <title>1xBET Ultra Full Platform Prototype</title>
   <style>
     :root {
       --bg-main: #0b141f;
@@ -19,514 +19,336 @@
       --border-color: #223752;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg-main); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; }
 
-    body {
-      background-color: var(--bg-main);
-      color: var(--text-main);
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    /* Top Bar */
+    /* Top Utility Bar */
     .top-bar {
-      background: #080f17;
-      padding: 6px 20px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border-color);
+      background: #080f17; padding: 6px 20px; font-size: 0.8rem; color: var(--text-muted);
+      display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color);
     }
 
-    /* Main Navbar */
+    /* Navbar */
     .navbar {
-      background: var(--bg-header);
-      padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid var(--accent-blue);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      background: var(--bg-header); padding: 10px 20px; display: flex; justify-content: space-between;
+      align-items: center; border-bottom: 2px solid var(--accent-blue); position: sticky; top: 0; z-index: 100;
     }
-
-    .brand {
-      font-size: 1.8rem;
-      font-weight: 900;
-      font-style: italic;
-      color: #fff;
-      cursor: pointer;
-    }
-
+    .brand { font-size: 1.8rem; font-weight: 900; font-style: italic; color: #fff; cursor: pointer; }
     .brand span { color: var(--accent-blue); }
+    
+    .nav-links { display: flex; gap: 10px; }
+    .nav-link { color: #fff; font-weight: 600; font-size: 0.9rem; padding: 8px 12px; border-radius: 4px; cursor: pointer; }
+    .nav-link:hover, .nav-link.active { background: var(--accent-blue); }
 
-    .nav-links {
-      display: flex;
-      gap: 15px;
-    }
-
-    .nav-link {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      padding: 8px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .nav-link:hover, .nav-link.active {
-      background: var(--accent-blue);
-    }
-
-    .user-section {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .balance-box {
-      background: #080f17;
-      padding: 6px 12px;
-      border-radius: 4px;
-      border: 1px solid var(--border-color);
-      font-size: 0.9rem;
-    }
-
+    .user-section { display: flex; align-items: center; gap: 10px; }
+    .balance-box { background: #080f17; padding: 6px 12px; border-radius: 4px; border: 1px solid var(--border-color); font-size: 0.9rem; }
+    
     .deposit-btn {
-      background: var(--accent-yellow);
-      color: #000;
-      border: none;
-      padding: 8px 14px;
-      font-weight: bold;
-      border-radius: 4px;
-      cursor: pointer;
+      background: var(--accent-green); color: #000; border: none; padding: 8px 14px;
+      font-weight: bold; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 5px;
     }
 
-    /* Dashboard Layout */
-    .dashboard {
-      display: grid;
-      grid-template-columns: 220px 1fr 300px;
-      gap: 15px;
-      padding: 15px;
-      flex: 1;
-    }
-
-    @media (max-width: 1024px) {
-      .dashboard { grid-template-columns: 1fr 300px; }
-      .sidebar { display: none; }
-    }
-
-    @media (max-width: 768px) {
-      .dashboard { grid-template-columns: 1fr; }
-    }
+    /* Main Dashboard Layout */
+    .dashboard { display: grid; grid-template-columns: 200px 1fr 300px; gap: 15px; padding: 15px; flex: 1; }
+    @media (max-width: 1024px) { .dashboard { grid-template-columns: 1fr 300px; } .sidebar { display: none; } }
+    @media (max-width: 768px) { .dashboard { grid-template-columns: 1fr; } }
 
     /* Left Sidebar */
-    .sidebar {
-      background: var(--bg-header);
-      border-radius: 6px;
-      border: 1px solid var(--border-color);
-      padding: 10px;
-    }
-
-    .sidebar-title {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      padding: 8px;
-      font-weight: bold;
-    }
-
-    .sidebar-menu {
-      list-style: none;
-    }
-
-    .sidebar-item {
-      padding: 10px;
-      border-radius: 4px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.9rem;
-      margin-bottom: 2px;
-    }
-
+    .sidebar { background: var(--bg-header); border-radius: 6px; border: 1px solid var(--border-color); padding: 10px; }
+    .sidebar-title { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; padding: 8px; font-weight: bold; }
+    .sidebar-item { padding: 10px; border-radius: 4px; cursor: pointer; display: flex; justify-content: space-between; font-size: 0.88rem; }
     .sidebar-item:hover { background: var(--bg-hover); }
 
-    /* Main Content Area */
-    .main-area { display: flex; flex-direction: column; gap: 15px; }
-
+    /* Center Content Views */
     .view-panel { display: none; }
     .view-panel.active { display: block; }
 
-    /* Match Section Header */
-    .match-header {
-      background: var(--bg-header);
-      padding: 10px 15px;
-      border-radius: 6px 6px 0 0;
-      font-weight: bold;
-      border-left: 4px solid var(--accent-blue);
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .match-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-top: none;
-      padding: 12px 15px;
-      margin-bottom: 10px;
-    }
-
-    .match-card:last-child { border-radius: 0 0 6px 6px; }
-
-    .match-info {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .teams-title {
-      font-size: 1rem;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    /* Odds Table Grid */
-    .odds-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-    }
-
-    .odd-box {
-      background: #0e1a29;
-      border: 1px solid var(--border-color);
-      padding: 8px;
-      border-radius: 4px;
-      text-align: center;
-      cursor: pointer;
-    }
-
+    /* Sports Cards & Match Tracker */
+    .match-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 6px; padding: 15px; margin-bottom: 12px; }
+    .live-tracker { background: #080f17; padding: 10px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-left: 3px solid var(--accent-red); }
+    .score-badge { font-size: 1.2rem; font-weight: bold; color: var(--accent-yellow); }
+    
+    .odds-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 10px; }
+    .odd-box { background: #0e1a29; border: 1px solid var(--border-color); padding: 8px; border-radius: 4px; text-align: center; cursor: pointer; }
     .odd-box:hover { border-color: var(--accent-blue); background: var(--bg-hover); }
-    .odd-box.selected { background: var(--accent-blue); }
+    .odd-val { font-weight: bold; color: var(--accent-green); display: block; margin-top: 2px; }
 
-    .odd-name { display: block; font-size: 0.75rem; color: var(--text-muted); }
-    .odd-val { display: block; font-size: 1rem; font-weight: bold; color: var(--accent-green); margin-top: 2px; }
-    .odd-box.selected .odd-name, .odd-box.selected .odd-val { color: #fff; }
+    /* Aviator & Casino Styles */
+    .aviator-wrapper { background: var(--bg-header); border: 1px solid var(--border-color); border-radius: 6px; padding: 15px; text-align: center; }
+    .mult-history { display: flex; gap: 5px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 10px; }
+    .hist-chip { background: #080f17; border: 1px solid var(--border-color); padding: 3px 8px; border-radius: 12px; font-size: 0.75rem; color: var(--accent-blue); font-weight: bold; }
+    
+    .aviator-screen { background: #050a12; height: 220px; border-radius: 8px; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; border: 1px solid var(--border-color); margin-bottom: 15px; }
+    .plane { position: absolute; font-size: 2.2rem; bottom: 20px; left: 20px; transition: all 0.1s linear; }
 
-    /* Aviator Panel */
-    .aviator-wrapper {
-      background: var(--bg-header);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 20px;
-      text-align: center;
-    }
+    /* Casino Games Grid */
+    .casino-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+    .casino-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 6px; height: 110px; display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 0.9rem; font-weight: bold; cursor: pointer; text-align: center; padding: 5px; }
+    .casino-card:hover { border-color: var(--accent-blue); transform: translateY(-2px); }
 
-    .aviator-screen {
-      background: #050a12;
-      height: 250px;
-      border-radius: 8px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid var(--border-color);
-      margin-bottom: 15px;
-    }
+    /* Modal / Pop-up (Deposit Portal) */
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 1000; }
+    .modal-card { background: var(--bg-header); border: 1px solid var(--border-color); width: 90%; max-width: 500px; border-radius: 8px; padding: 20px; position: relative; }
+    .modal-close { position: absolute; right: 15px; top: 15px; font-size: 1.2rem; cursor: pointer; color: var(--text-muted); }
+    
+    .pay-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 15px 0; }
+    .pay-card { background: #080f17; border: 1px solid var(--border-color); padding: 10px; border-radius: 6px; text-align: center; cursor: pointer; font-size: 0.8rem; }
+    .pay-card.active { border-color: var(--accent-green); background: var(--bg-hover); }
 
-    .multiplier { font-size: 4rem; font-weight: 900; color: var(--accent-green); }
-
-    .plane {
-      position: absolute;
-      font-size: 2.5rem;
-      bottom: 20px;
-      left: 20px;
-      transition: all 0.1s linear;
-    }
-
-    .aviator-controls {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-    }
-
-    /* Casino Grid */
-    .casino-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 12px;
-    }
-
-    .casino-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      height: 120px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .casino-card:hover { transform: translateY(-3px); border-color: var(--accent-blue); }
-
-    /* Right Sidebar (Bet Slip & History) */
-    .right-sidebar { display: flex; flex-direction: column; gap: 15px; }
-
-    .panel-box {
-      background: var(--bg-header);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 12px;
-    }
-
-    .panel-header {
-      font-weight: bold;
-      font-size: 0.95rem;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 8px;
-      margin-bottom: 10px;
-    }
-
-    .form-input {
-      width: 100%;
-      padding: 10px;
-      background: #080f17;
-      border: 1px solid var(--border-color);
-      color: #fff;
-      border-radius: 4px;
-      margin-top: 5px;
-      margin-bottom: 10px;
-    }
-
-    .action-btn {
-      width: 100%;
-      background: var(--accent-green);
-      color: #000;
-      border: none;
-      padding: 10px;
-      font-weight: bold;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
+    /* Forms & Buttons */
+    .form-input { width: 100%; padding: 10px; background: #080f17; border: 1px solid var(--border-color); color: #fff; border-radius: 4px; margin: 5px 0 10px 0; }
+    .action-btn { width: 100%; background: var(--accent-green); color: #000; border: none; padding: 10px; font-weight: bold; border-radius: 4px; cursor: pointer; }
     .action-btn:hover { opacity: 0.9; }
 
-    /* History Table */
-    .history-list { font-size: 0.8rem; }
-    .history-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 6px 0;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .status-won { color: var(--accent-green); }
-    .status-lost { color: var(--accent-red); }
+    /* Right Sidebar */
+    .panel-box { background: var(--bg-header); border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; margin-bottom: 12px; }
+    .panel-header { font-weight: bold; font-size: 0.9rem; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-bottom: 10px; }
+    .history-item { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border-color); font-size: 0.8rem; }
   </style>
 </head>
 <body>
 
-  <!-- Top Utilities Bar -->
+  <!-- Top bar -->
   <div class="top-bar">
-    <span>🌐 Language: Sinhala | Time Zone: UTC+5:30</span>
-    <span>🛡️ Secure Connection | 24/7 Support</span>
+    <span>🌐 Language: Sinhala | UTC+05:30</span>
+    <span>🔒 SSL Secured | 24/7 Agent Support</span>
   </div>
 
-  <!-- Main Navigation -->
+  <!-- Navbar -->
   <header class="navbar">
-    <div class="brand">1x<span>BET</span> <small style="font-size: 0.4em; color: #fff;">PROTOTYPE</small></div>
+    <div class="brand">1x<span>BET</span> <small style="font-size:0.4em; color:#fff;">PROTOTYPE</small></div>
     
     <nav class="nav-links">
-      <span class="nav-link active" onclick="switchMainView('sports', this)">🏏 Sports</span>
-      <span class="nav-link" onclick="switchMainView('aviator', this)">✈️ Aviator</span>
-      <span class="nav-link" onclick="switchMainView('casino', this)">🎰 Casino</span>
+      <span class="nav-link active" onclick="switchView('sports', this)">🏏 Sports Live</span>
+      <span class="nav-link" onclick="switchView('aviator', this)">✈️ Aviator</span>
+      <span class="nav-link" onclick="switchView('casino', this)">🎰 Casino</span>
     </nav>
 
     <div class="user-section">
       <div class="balance-box">
-        ශේෂය: $<span id="user-balance" style="color: var(--accent-green); font-weight: bold;">100.00</span>
+        ශේෂය: $<span id="user-balance" style="color:var(--accent-green); font-weight:bold;">100.00</span>
       </div>
-      <button class="deposit-btn" onclick="addFunds()">+ Deposit</button>
+      <button class="deposit-btn" onclick="openDepositModal()">💳 Deposit</button>
     </div>
   </header>
 
   <!-- Dashboard -->
   <div class="dashboard">
 
-    <!-- Left Sidebar: Categories -->
+    <!-- Left Sidebar -->
     <aside class="sidebar">
-      <div class="sidebar-title">Sports Categories</div>
-      <ul class="sidebar-menu">
-        <li class="sidebar-item">🏏 Cricket <span>(12)</span></li>
-        <li class="sidebar-item">⚽ Football <span>(45)</span></li>
-        <li class="sidebar-item">🎾 Tennis <span>(8)</span></li>
-        <li class="sidebar-item">🏀 Basketball <span>(15)</span></li>
-        <li class="sidebar-item">🎮 Esports <span>(20)</span></li>
-      </ul>
+      <div class="sidebar-title">Sports List</div>
+      <div class="sidebar-item">🏏 Cricket <span>(14)</span></div>
+      <div class="sidebar-item">⚽ Football <span>(38)</span></div>
+      <div class="sidebar-item">🎾 Tennis <span>(9)</span></div>
+      <div class="sidebar-item">🏀 Basketball <span>(12)</span></div>
+      <div class="sidebar-item">🎮 E-Sports <span>(19)</span></div>
     </aside>
 
     <!-- Main Content Panel -->
-    <main class="main-area">
+    <main>
 
       <!-- View 1: Sports Section -->
       <div id="view-sports" class="view-panel active">
-        <div class="match-header">
-          <span>🔴 LIVE MATCHES</span>
-          <span style="color: var(--accent-yellow); font-size: 0.85rem;">Odds Update: Real-time</span>
-        </div>
-
-        <!-- Match 1 -->
+        
+        <!-- Live Match 1 -->
         <div class="match-card">
-          <div class="match-info">
-            <span>T20 World Cup</span>
-            <span>Over 15.4</span>
+          <div class="live-tracker">
+            <div>
+              <span style="color:var(--accent-red); font-weight:bold;">● LIVE</span> T20 World Cup
+            </div>
+            <div class="score-badge">SL 142/4 (16.2 ov)</div>
           </div>
-          <div class="teams-title">Sri Lanka vs India</div>
+          <div style="font-weight:bold; font-size:1.05rem;">Sri Lanka vs India</div>
           <div class="odds-grid">
-            <div class="odd-box" onclick="selectOdd('Sri Lanka (VS Ind)', 2.15)">
-              <span class="odd-name">W1 (Sri Lanka)</span>
-              <span class="odd-val">2.15</span>
+            <div class="odd-box" onclick="selectOdd('Sri Lanka (T20)', 2.10)">
+              <span style="font-size:0.75rem; color:var(--text-muted);">W1 (Sri Lanka)</span>
+              <span class="odd-val">2.10</span>
             </div>
-            <div class="odd-box" onclick="selectOdd('Draw (SL vs Ind)', 14.00)">
-              <span class="odd-name">Draw</span>
-              <span class="odd-val">14.00</span>
+            <div class="odd-box" onclick="selectOdd('Draw (T20)', 15.00)">
+              <span style="font-size:0.75rem; color:var(--text-muted);">Draw</span>
+              <span class="odd-val">15.00</span>
             </div>
-            <div class="odd-box" onclick="selectOdd('India (VS SL)', 1.70)">
-              <span class="odd-name">W2 (India)</span>
-              <span class="odd-val">1.70</span>
+            <div class="odd-box" onclick="selectOdd('India (T20)', 1.75)">
+              <span style="font-size:0.75rem; color:var(--text-muted);">W2 (India)</span>
+              <span class="odd-val">1.75</span>
             </div>
           </div>
         </div>
 
-        <!-- Match 2 -->
+        <!-- Live Match 2 -->
         <div class="match-card">
-          <div class="match-info">
-            <span>Premier League</span>
-            <span>72' Mins</span>
+          <div class="live-tracker">
+            <div>
+              <span style="color:var(--accent-red); font-weight:bold;">● LIVE</span> UEFA Champions League
+            </div>
+            <div class="score-badge">1 - 0 (65')</div>
           </div>
-          <div class="teams-title">Real Madrid vs Barcelona</div>
+          <div style="font-weight:bold; font-size:1.05rem;">Real Madrid vs Barcelona</div>
           <div class="odds-grid">
-            <div class="odd-box" onclick="selectOdd('Real Madrid', 1.95)">
-              <span class="odd-name">W1 (Real)</span>
-              <span class="odd-val">1.95</span>
+            <div class="odd-box" onclick="selectOdd('Real Madrid', 1.45)">
+              <span style="font-size:0.75rem; color:var(--text-muted);">W1 (Real)</span>
+              <span class="odd-val">1.45</span>
             </div>
-            <div class="odd-box" onclick="selectOdd('Draw (El Clasico)', 3.40)">
-              <span class="odd-name">Draw</span>
-              <span class="odd-val">3.40</span>
+            <div class="odd-box" onclick="selectOdd('Draw (El Clasico)', 3.80)">
+              <span style="font-size:0.75rem; color:var(--text-muted);">Draw</span>
+              <span class="odd-val">3.80</span>
             </div>
-            <div class="odd-box" onclick="selectOdd('Barcelona', 3.10)">
-              <span class="odd-name">W2 (Barca)</span>
-              <span class="odd-val">3.10</span>
+            <div class="odd-box" onclick="selectOdd('Barcelona', 5.20)">
+              <span style="font-size:0.75rem; color:var(--text-muted);">W2 (Barca)</span>
+              <span class="odd-val">5.20</span>
             </div>
           </div>
         </div>
+
       </div>
 
-      <!-- View 2: Aviator Game -->
+      <!-- View 2: Aviator Crash Game -->
       <div id="view-aviator" class="view-panel">
         <div class="aviator-wrapper">
-          <h2>✈️ Aviator Crash Game</h2>
-          <br>
+          <div class="mult-history">
+            <span class="hist-chip">1.24x</span>
+            <span class="hist-chip">3.50x</span>
+            <span class="hist-chip">1.05x</span>
+            <span class="hist-chip">12.40x</span>
+            <span class="hist-chip">2.10x</span>
+          </div>
           <div class="aviator-screen">
             <div id="plane-icon" class="plane">✈️</div>
-            <div id="crash-mult" class="multiplier">1.00x</div>
+            <div id="crash-mult" style="font-size:3.5rem; font-weight:900; color:var(--accent-green);">1.00x</div>
           </div>
-          <div class="aviator-controls">
-            <input type="number" id="aviator-stake" class="form-input" value="10" style="width:120px; margin:0;">
-            <button id="btn-aviator-start" class="action-btn" style="width:auto; padding: 10px 20px;" onclick="runAviator()">Start Bet</button>
-            <button id="btn-aviator-cashout" class="action-btn" style="width:auto; padding: 10px 20px; background:var(--accent-yellow); display:none;" onclick="cashoutAviator()">Cash Out</button>
+          <div style="display:flex; gap:10px; justify-content:center;">
+            <input type="number" id="aviator-stake" class="form-input" value="10" style="width:110px; margin:0;">
+            <button id="btn-aviator-start" class="action-btn" style="width:auto; padding:10px 20px;" onclick="runAviator()">Bet Start</button>
+            <button id="btn-aviator-cashout" class="action-btn" style="width:auto; padding:10px 20px; background:var(--accent-yellow); display:none;" onclick="cashoutAviator()">Cash Out</button>
           </div>
         </div>
       </div>
 
-      <!-- View 3: Casino Section -->
+      <!-- View 3: Live Casino -->
       <div id="view-casino" class="view-panel">
         <div class="casino-grid">
-          <div class="casino-card" onclick="alert('Slot Game Loading...')">🎰 Sweet Bonanza</div>
-          <div class="casino-card" onclick="alert('Slot Game Loading...')">👑 Gates of Olympus</div>
-          <div class="casino-card" onclick="alert('Casino Game Loading...')">🎲 Live Roulette</div>
-          <div class="casino-card" onclick="alert('Casino Game Loading...')">🃏 Blackjack VIP</div>
+          <div class="casino-card" onclick="alert('Roulette Table Opening...')">🎡 Live Roulette</div>
+          <div class="casino-card" onclick="alert('Blackjack Table Opening...')">🃏 Blackjack Live</div>
+          <div class="casino-card" onclick="alert('Crazy Time Opening...')">🎪 Crazy Time</div>
+          <div class="casino-card" onclick="alert('Sweet Bonanza Opening...')">🎰 Sweet Bonanza</div>
+          <div class="casino-card" onclick="alert('Gates of Olympus Opening...')">⚡ Gates of Olympus</div>
+          <div class="casino-card" onclick="alert('Baccarat Table Opening...')">🎴 Live Baccarat</div>
         </div>
       </div>
 
     </main>
 
-    <!-- Right Sidebar: Bet Slip & Bets History -->
-    <aside class="right-sidebar">
-      
-      <!-- Bet Slip Box -->
+    <!-- Right Sidebar (Bet Slip & History) -->
+    <aside>
       <div class="panel-box">
         <div class="panel-header">🎟️ Bet Slip</div>
-        <div id="slip-empty" style="font-size:0.85rem; color: var(--text-muted);">ගැළපෙන Odds එකක් තෝරන්න.</div>
+        <div id="slip-empty" style="font-size:0.85rem; color:var(--text-muted);">Odds එකක් තෝරන්න.</div>
         
         <div id="slip-content" style="display:none;">
           <div id="slip-target" style="font-size:0.9rem; font-weight:bold;">-</div>
-          <div style="font-size:0.8rem; color:var(--accent-green); margin-top:3px;">Odds: <span id="slip-rate">0.00</span></div>
-          
+          <div style="font-size:0.8rem; color:var(--accent-green); margin: 4px 0;">Odds: <span id="slip-rate">0.00</span></div>
           <input type="number" id="stake-input" class="form-input" value="10" oninput="recalcWin()">
-          
           <div style="font-size:0.85rem; margin-bottom:10px;">
             දිනිය හැකි මුදල: $<span id="win-val" style="color:var(--accent-green); font-weight:bold;">0.00</span>
           </div>
-
           <button class="action-btn" onclick="submitBet()">Bet එක තබන්න</button>
         </div>
       </div>
 
-      <!-- History Box -->
       <div class="panel-box">
         <div class="panel-header">📜 Bet History</div>
-        <div class="history-list" id="history-box">
-          <!-- Dynamically populated -->
+        <div id="history-box"></div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Cash Deposit Portal Modal -->
+  <div id="deposit-modal" class="modal-overlay">
+    <div class="modal-card">
+      <span class="modal-close" onclick="closeDepositModal()">&times;</span>
+      <h3>💳 Deposit Cash (තැන්පතු)</h3>
+      <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">මාරු කිරීමට අවශ්‍ය ක්‍රමය තෝරන්න:</p>
+
+      <div class="pay-methods">
+        <div class="pay-card active" onclick="setPayMethod('Bank Transfer', this)">
+          🏦 Bank Transfer<br><small>Commercial/HNB</small>
+        </div>
+        <div class="pay-card" onclick="setPayMethod('USDT Crypto', this)">
+          🪙 Crypto<br><small>USDT (TRC20)</small>
+        </div>
+        <div class="pay-card" onclick="setPayMethod('e-Wallet', this)">
+          👛 e-Wallet<br><small>Skrill / Neteller</small>
         </div>
       </div>
 
-    </aside>
+      <label style="font-size:0.85rem;">තැන්පත් කරන මුදල ($):</label>
+      <input type="number" id="dep-amount" class="form-input" value="50" min="5">
 
+      <div id="bank-details-box" style="background:#080f17; padding:10px; border-radius:4px; font-size:0.8rem; margin-bottom:10px;">
+        <strong>ගිණුම් විස්තර:</strong><br>
+        Bank: Commercial Bank PLC<br>
+        Acc No: 8009238491<br>
+        Name: MegaBet Pvt Ltd
+      </div>
+
+      <button class="action-btn" onclick="confirmDeposit()">Deposit එක තහවුරු කරන්න</button>
+    </div>
   </div>
 
   <script>
     let balance = 100.00;
     let selectedOddsVal = 0;
     let selectedTargetName = "";
+    let selectedPayMethod = "Bank Transfer";
 
-    // Navigation Handler
-    function switchMainView(viewName, element) {
+    // Navigation Logic
+    function switchView(viewName, el) {
       document.querySelectorAll('.view-panel').forEach(v => v.classList.remove('active'));
       document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
       
       document.getElementById('view-' + viewName).classList.add('active');
-      element.classList.add('active');
+      el.classList.add('active');
     }
 
-    // Odds Selection
+    // Modal Controls
+    function openDepositModal() { document.getElementById('deposit-modal').style.display = 'flex'; }
+    function closeDepositModal() { document.getElementById('deposit-modal').style.display = 'none'; }
+
+    function setPayMethod(method, el) {
+      selectedPayMethod = method;
+      document.querySelectorAll('.pay-card').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+
+      const infoBox = document.getElementById('bank-details-box');
+      if(method === 'USDT Crypto') {
+        infoBox.innerHTML = `<strong>Crypto TRC20 Address:</strong><br><span style="color:var(--accent-yellow)">TX9z2kL1M8nP...aB3c4D</span>`;
+      } else if(method === 'e-Wallet') {
+        infoBox.innerHTML = `<strong>e-Wallet Merchant ID:</strong><br>pay@megabet-demo.com`;
+      } else {
+        infoBox.innerHTML = `<strong>ගිණුම් විස්තර:</strong><br>Bank: Commercial Bank PLC<br>Acc No: 8009238491<br>Name: MegaBet Pvt Ltd`;
+      }
+    }
+
+    function confirmDeposit() {
+      const amt = parseFloat(document.getElementById('dep-amount').value);
+      if(!amt || amt <= 0) { alert("වලංගු මුදලක් ඇතුළත් කරන්න."); return; }
+
+      balance += amt;
+      updateUI();
+      closeDepositModal();
+      alert(`$${amt.toFixed(2)} ක් ${selectedPayMethod} හරහා තැන්පත් කිරීම සාර්ථකයි!`);
+    }
+
+    // Odds & Bet Slip Logic
     function selectOdd(target, rate) {
       selectedTargetName = target;
       selectedOddsVal = rate;
-
       document.getElementById('slip-empty').style.display = 'none';
       document.getElementById('slip-content').style.display = 'block';
-
       document.getElementById('slip-target').innerText = target;
       document.getElementById('slip-rate').innerText = rate.toFixed(2);
-
       recalcWin();
     }
 
@@ -542,10 +364,10 @@
       balance -= stake;
       updateUI();
       addHistory(selectedTargetName, stake, "Pending");
-      alert("Bet එක තබන ලදී!");
+      alert("Bet එක සාර්ථකව තබන ලදී!");
     }
 
-    // Aviator Logic
+    // Aviator Engine
     let aviatorTimer;
     let currentMult = 1.00;
     let crashLimit = 0;
@@ -560,7 +382,7 @@
       updateUI();
 
       currentMult = 1.00;
-      crashLimit = (Math.random() * 3.5 + 1.2).toFixed(2);
+      crashLimit = (Math.random() * 3.2 + 1.1).toFixed(2);
 
       document.getElementById('btn-aviator-start').style.display = 'none';
       document.getElementById('btn-aviator-cashout').style.display = 'inline-block';
@@ -571,13 +393,13 @@
         currentMult += 0.02;
         document.getElementById('crash-mult').innerText = currentMult.toFixed(2) + "x";
 
-        plane.style.left = Math.min((currentMult - 1) * 80, 220) + "px";
-        plane.style.bottom = Math.min((currentMult - 1) * 40, 150) + "px";
+        plane.style.left = Math.min((currentMult - 1) * 70, 200) + "px";
+        plane.style.bottom = Math.min((currentMult - 1) * 35, 130) + "px";
 
         if (currentMult >= crashLimit) {
           clearInterval(aviatorTimer);
           document.getElementById('crash-mult').style.color = "var(--accent-red)";
-          document.getElementById('crash-mult').innerText = "CRASHED!";
+          document.getElementById('crash-mult').innerText = "FLEW AWAY!";
           
           document.getElementById('btn-aviator-start').style.display = 'inline-block';
           document.getElementById('btn-aviator-cashout').style.display = 'none';
@@ -586,8 +408,7 @@
 
           setTimeout(() => {
             document.getElementById('crash-mult').style.color = "var(--accent-green)";
-            plane.style.left = "20px";
-            plane.style.bottom = "20px";
+            plane.style.left = "20px"; plane.style.bottom = "20px";
             document.getElementById('crash-mult').innerText = "1.00x";
           }, 1500);
         }
@@ -604,31 +425,23 @@
       document.getElementById('btn-aviator-cashout').style.display = 'none';
 
       addHistory("Aviator (" + currentMult.toFixed(2) + "x)", currentStake, "Won");
-      alert("$" + win.toFixed(2) + " ක මුදලක් දිනාගත්තා!");
+      alert("$" + win.toFixed(2) + " ක් Cash Out කරන ලදී!");
     }
 
-    // Utility Functions
-    function addFunds() {
-      balance += 50.00;
-      updateUI();
-    }
-
-    function updateUI() {
-      document.getElementById('user-balance').innerText = balance.toFixed(2);
-    }
+    // Helper functions
+    function updateUI() { document.getElementById('user-balance').innerText = balance.toFixed(2); }
 
     function addHistory(name, stake, status) {
       const box = document.getElementById('history-box');
       const item = document.createElement('div');
       item.className = "history-item";
 
-      let statusColor = "status-won";
-      if (status === "Lost") statusColor = "status-lost";
+      let statusColor = status === "Won" ? "color:var(--accent-green);" : (status === "Lost" ? "color:var(--accent-red);" : "color:var(--accent-yellow);");
 
       item.innerHTML = `
         <span>${name}</span>
         <span>$${stake.toFixed(2)}</span>
-        <span class="${statusColor}">${status}</span>
+        <span style="${statusColor} font-weight:bold;">${status}</span>
       `;
       box.prepend(item);
     }
