@@ -13,7 +13,7 @@
     <style>
         :root {
             --bg-primary: #030712;
-            --bg-card: rgba(15, 23, 42, 0.85);
+            --bg-card: rgba(15, 23, 42, 0.82);
             --accent-gold: #f59e0b;
             --accent-blue: #38bdf8;
             --text-main: #f8fafc;
@@ -37,7 +37,7 @@
             overflow-x: hidden;
         }
 
-        /* Ambient Background Blur Layer */
+        /* Ambient Dark Background Overlay */
         .bg-background-image {
             position: fixed;
             top: 0;
@@ -47,7 +47,7 @@
             background-image: url('author.jpg.png');
             background-size: cover;
             background-position: center;
-            filter: blur(30px) brightness(0.2);
+            filter: blur(35px) brightness(0.18);
             transform: scale(1.1);
             z-index: -1;
         }
@@ -58,22 +58,22 @@
             padding: 50px 20px;
         }
 
-        /* Hero Header */
+        /* Header */
         .hero-header {
             text-align: center;
-            padding: 20px 0 35px;
+            padding: 20px 0 30px;
         }
 
         .author-badge {
             display: inline-block;
-            padding: 6px 20px;
+            padding: 6px 22px;
             background: rgba(56, 189, 248, 0.12);
             border: 1px solid rgba(56, 189, 248, 0.3);
             border-radius: 50px;
             color: var(--accent-blue);
             font-size: 0.8rem;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
             margin-bottom: 12px;
         }
@@ -93,7 +93,7 @@
             font-weight: 300;
         }
 
-        /* Top Featured Cover Design Section */
+        /* 1. Full Cover Showcase Section */
         .cover-showcase-card {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
@@ -122,16 +122,16 @@
         .full-cover-wrapper {
             display: inline-block;
             position: relative;
-            border-radius: 16px;
+            border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 25px 55px rgba(0, 0, 0, 0.85);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .full-cover-wrapper:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 30px 60px rgba(56, 189, 248, 0.25);
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 35px 70px rgba(56, 189, 248, 0.3);
             border-color: rgba(56, 189, 248, 0.5);
         }
 
@@ -142,7 +142,38 @@
             display: block;
         }
 
-        /* Main Novel Synopsis Card */
+        /* Quick Info Badges */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-light);
+            border-radius: 18px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        /* 2. Main Novel Details Card */
         .main-card {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
@@ -170,7 +201,7 @@
             color: var(--accent-gold);
             font-style: italic;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
             padding-bottom: 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -188,19 +219,55 @@
             color: var(--accent-blue);
         }
 
-        /* Footer & Order Button */
+        /* Read Excerpt Button Section */
+        .excerpt-trigger-wrap {
+            text-align: center;
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-light);
+            color: #ffffff;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.18);
+            transform: translateY(-2px);
+        }
+
+        /* 3. Footer & Action Buttons */
         .footer-card {
             text-align: center;
-            padding: 35px;
+            padding: 40px 30px;
             background: rgba(15, 23, 42, 0.75);
             backdrop-filter: blur(16px);
             border-radius: 24px;
             border: 1px solid var(--border-light);
         }
 
+        .cta-buttons-wrap {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
         .contact-btn {
-            display: inline-block;
-            margin-top: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             padding: 16px 36px;
             background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
             color: #ffffff;
@@ -218,34 +285,72 @@
         }
 
         .copyright {
-            margin-top: 22px;
+            margin-top: 25px;
             color: var(--text-muted);
             font-size: 0.85rem;
         }
 
-        /* Responsive Mobile Layout */
+        /* Modal Box for Book Excerpt */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 999;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-body {
+            background: #0f172a;
+            border: 1px solid var(--border-light);
+            border-radius: 24px;
+            max-width: 650px;
+            width: 100%;
+            padding: 40px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .author-name {
-                font-size: 2.2rem;
-            }
-            .novel-title {
-                font-size: 2.5rem;
-            }
-            .quote-box {
-                font-size: 1.25rem;
-            }
-            .main-card, .cover-showcase-card {
-                padding: 25px 20px;
-            }
-            .synopsis-text {
-                font-size: 1.2rem;
-            }
+            .author-name { font-size: 2.2rem; }
+            .novel-title { font-size: 2.5rem; }
+            .quote-box { font-size: 1.25rem; }
+            .main-card, .cover-showcase-card { padding: 25px 20px; }
+            .synopsis-text { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Ambient Dark Background -->
+    <!-- Ambient Background -->
     <div class="bg-background-image"></div>
 
     <div class="container">
@@ -254,20 +359,40 @@
         <header class="hero-header">
             <span class="author-badge">Official Author Page</span>
             <h1 class="author-name">KAVINDA D SENANAYAKA</h1>
-            <p class="author-tagline">Author of "Mandaram Kathavak"</p>
+            <p class="author-tagline">Author of "Mandaram Kathava"</p>
         </header>
 
-        <!-- 1. FIRST SECTION: FULL COVER DESIGN -->
+        <!-- 1. FULL COVER DESIGN SHOWCASE -->
         <section class="cover-showcase-card">
-            <div class="cover-title-tag">✨ Book Cover Design</div>
+            <div class="cover-title-tag">✨ Official Cover Design Showcase</div>
             <div class="full-cover-wrapper">
-                <img src="author.jpg.png" alt="මන්දාරම් කතාවක් Full Cover Design - Kavinda D Senanayaka" class="full-cover-img">
+                <img src="author.jpg.png" alt="මන්දාරම් කතාව Full Cover Design - Kavinda D Senanayaka" class="full-cover-img">
             </div>
         </section>
 
-        <!-- 2. SECOND SECTION: NOVEL DETAILS & SYNOPSIS -->
+        <!-- QUICK BOOK STATS -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Genre / තේමාව</div>
+                <div class="stat-value">Romantic Drama</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Setting / පසුබිම</div>
+                <div class="stat-value">University of Peradeniya</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Language / භාෂාව</div>
+                <div class="stat-value">Sinhala (සිංහල)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Format / ආකෘතිය</div>
+                <div class="stat-value">Printed Novel</div>
+            </div>
+        </div>
+
+        <!-- 2. MAIN NOVEL SYNOPSIS -->
         <main class="main-card">
-            <h2 class="novel-title">මන්දාරම් කතාවක්</h2>
+            <h2 class="novel-title">මන්දාරම් කතාව</h2>
             <p class="quote-box">"හන්තාන අහස යට ලියැවුණු, සරසවි වසන්තයක සදාකාලික මතකය..."</p>
 
             <p class="synopsis-text">
@@ -279,7 +404,7 @@
             </p>
 
             <p class="synopsis-text">
-                මේ සුන්දර මිත්‍රත්වයේ රිද්මය මැදට, වසන්තයේ පිපුණු සොදුරු  මලක් මෙන් නිම්නා පැමිණෙන්නේ දේශ්ගේ හදවතේ ආදරයේ නොමැකෙන සිතුවම් අඳිමිනි. හන්තාන කඳු මුදුනේදී ඔවුන් හුවමාරු කරගත් රහස් පොරොන්දු, නුවර වැව රවුමේ සුදු වලාකුළු බැම්ම අසල මැවූ සිහින, ඔවුන්ගේ ප්‍රේමයට සදාකාලිකත්වයේ මුද්‍රාව තබයි.
+                මේ සුන්දර මිත්‍රත්වයේ රිද්මය මැදට, වසන්තයේ පිපුණු කඳුරු මලක් මෙන් නිම්නා පැමිණෙන්නේ දේශ්ගේ හදවතේ ආදරයේ නොමැකෙන සිතුවම් අඳිමිනි. හන්තාන කඳු මුදුනේදී ඔවුන් හුවමාරු කරගත් රහස් පොරොන්දු, නුවර වැව රවුමේ සුදු වලාකුළු බැම්ම අසල මැවූ සිහින, ඔවුන්ගේ ප්‍රේමයට සදාකාලිකත්වයේ මුද්‍රාව තබයි.
             </p>
 
             <p class="synopsis-text">
@@ -287,18 +412,52 @@
             </p>
 
             <p class="synopsis-text">
-                ආදරයේ අතිශය සුන්දර සුසංයෝගයත්, ජීවිතයේ අනිත්‍යතාව පිළිබඳ පරම සත්‍යයන් අපූරුවට පසක් කරලන, හදවතේ ගැඹුරුම තැන් ස්පර්ශ කරන සංවේදී ආදර අන්දරය — <strong>"මන්දාරම් කතාව"2027 දී අමතක නොවන කතාවක් වෙයි</strong>.
+                ආදරයේ අතිශය සුන්දර සුසංයෝගයත්, ජීවිතයේ අනිත්‍යතාව පිළිබඳ පරම සත්‍යයන් අපූරුවට පසක් කරලන, හදවතේ ගැඹුරුම තැන් ස්පර්ශ කරන සංවේදී ආදර අන්දරය — <strong>"මන්දාරම් කතාව"</strong>.
             </p>
+
+            <!-- Excerpt Modal Trigger -->
+            <div class="excerpt-trigger-wrap">
+                <button class="btn-secondary" onclick="openModal()">
+                    📖 පොතෙන් බිඳක් කියවන්න (Preview)
+                </button>
+            </div>
         </main>
 
         <!-- 3. FOOTER & CONTACT -->
         <footer class="footer-card">
-            <p style="color: #cbd5e1; font-size: 1.05rem;">කර්තෘ සමඟ සම්බන්ධ වීමට / ලගදීම 2027 දී:</p>
-            <a href="mailto:Kavindadeshan960@gmail.com" class="contact-btn">✉ Email: Kavindadeshan960@gmail.com</a>
+            <h3 style="font-size: 1.4rem; color: #fff; margin-bottom: 8px;">පොත ඇණවුම් කිරීමට / කර්තෘ සම්බන්ධ කරගැනීමට</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">ප්‍රකාශනය සහ බෙදාහැරීම් පිළිබඳ තොරතුරු සඳහා විමසන්න.</p>
+            
+            <div class="cta-buttons-wrap">
+                <a href="mailto:Kavindadeshan960@gmail.com" class="contact-btn">
+                    ✉ Email හරහා සම්බන්ධ වන්න
+                </a>
+            </div>
+
             <p class="copyright">&copy; 2026 KAVINDA D SENANAYAKA. All Rights Reserved.</p>
         </footer>
 
     </div>
+
+    <!-- READ EXCERPT POPUP MODAL -->
+    <div class="modal-overlay" id="excerptModal">
+        <div class="modal-body">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h3 style="font-family: 'Abhaya Libre', serif; font-size: 2rem; color: var(--accent-gold); margin-bottom: 15px;">මන්දාරම් කතාව — පොතෙන් බිඳක්</h3>
+            <p style="font-family: 'Abhaya Libre', serif; font-size: 1.25rem; color: #cbd5e1; line-height: 1.9;">
+                "හන්තාන පාමුලින් හමා ආ සීතල සුළඟ අක්බාර් පාලම මත රැඳී සිටි අපව වෙළා ගනිද්දී, ලෝවර් ලේන් එක දෙසින් ඇසුණු මෘදු පියවර හඬ අපගේ අවධානය පැහැර ගත්තේය. මීදුම් සාලුව අතරින් මතුවූ ඒ රුව, මගේ අනාගත දිනපොතේ සෑම පිටුවක්ම වෙනස් කිරීමට යන වග එදින මා මොහොතකටවත් නොසිතුවෙමි..."
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('excerptModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('excerptModal').classList.remove('active');
+        }
+    </script>
 
 </body>
 </html>
