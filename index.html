@@ -8,16 +8,17 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-primary: #080511;
-            --bg-card: rgba(20, 14, 35, 0.85);
-            --accent-gold: #f59e0b;
-            --accent-rose: #f43f5e;
+            --bg-primary: #06020c;
+            --bg-card: rgba(18, 10, 31, 0.75);
+            --accent-gold: #fbbf24;
+            --accent-pink: #f43f5e;
+            --accent-glow: rgba(244, 63, 94, 0.35);
             --text-main: #fff1f2;
-            --text-muted: #fda4af;
+            --text-muted: #fca5a5;
             --text-body: #ffe4e6;
             --border-light: rgba(244, 63, 94, 0.25);
         }
@@ -38,17 +39,17 @@
             overflow-x: hidden;
         }
 
-        /* Ambient Background Blur */
+        /* Animated Ambient Background */
         .bg-background-image {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('author.jpg.jpg');
+            background-image: url('authors.jpg.png');
             background-size: cover;
             background-position: center;
-            filter: blur(40px) brightness(0.2);
+            filter: blur(50px) brightness(0.18);
             transform: scale(1.1);
             z-index: -1;
         }
@@ -56,99 +57,102 @@
         .container {
             max-width: 1050px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 50px 20px;
         }
 
-        /* Header */
+        /* Header Section */
         .hero-header {
             text-align: center;
-            padding: 20px 0 30px;
+            padding: 30px 0 40px;
         }
 
         .author-badge {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             padding: 8px 24px;
-            background: rgba(244, 63, 94, 0.15);
-            border: 1px solid rgba(244, 63, 94, 0.35);
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.2), rgba(251, 191, 36, 0.15));
+            border: 1px solid var(--border-light);
             border-radius: 50px;
-            color: var(--accent-rose);
+            color: var(--accent-pink);
             font-size: 0.85rem;
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: 3px;
             text-transform: uppercase;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px var(--accent-glow);
         }
 
         .author-name {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             font-weight: 800;
             letter-spacing: 2px;
-            background: linear-gradient(135deg, #ffffff 0%, #ffe4e6 100%);
+            background: linear-gradient(135deg, #ffffff 30%, #fca5a5 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 8px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .author-tagline {
             color: var(--text-muted);
-            font-size: 1.2rem;
-            font-weight: 300;
+            font-size: 1.25rem;
+            font-weight: 400;
+            letter-spacing: 1px;
         }
 
-        /* 1. FULL COVER DESIGN SHOWCASE */
-        .cover-showcase-card {
+        /* Section Styling */
+        .glass-card {
             background: var(--bg-card);
-            backdrop-filter: blur(25px);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border: 1px solid var(--border-light);
-            border-radius: 32px;
-            padding: 45px;
+            border-radius: 36px;
+            padding: 50px;
             text-align: center;
-            margin-bottom: 40px;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+            margin-bottom: 45px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .cover-title-tag {
-            font-size: 1.15rem;
-            font-weight: 700;
+        .section-tag {
+            font-size: 1.1rem;
+            font-weight: 800;
             color: var(--accent-gold);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 25px;
+            letter-spacing: 2.5px;
+            margin-bottom: 30px;
+            display: inline-block;
         }
 
+        /* 1. FULL COVER DESIGN SHOWCASE (authors.jpg.png) */
         .full-cover-wrapper {
             display: inline-block;
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(244, 63, 94, 0.2);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95), 0 0 40px var(--accent-glow);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.4s ease;
+        }
+
+        .full-cover-wrapper:hover {
+            transform: translateY(-5px) scale(1.01);
         }
 
         .full-cover-img {
             width: 100%;
-            max-width: 600px;
+            max-width: 920px;
             height: auto;
             display: block;
         }
 
-        /* 2. REAL 3D BOOK FLIP EXPERIENCE */
-        .book-experience-card {
-            background: var(--bg-card);
-            backdrop-filter: blur(25px);
-            border: 1px solid var(--border-light);
-            border-radius: 32px;
-            padding: 50px 20px;
-            text-align: center;
-            margin-bottom: 40px;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
-            perspective: 1500px;
-        }
-
+        /* 2. 3D INTERACTIVE FLIP BOOK (author.jpg.png) */
         .book-3d-wrapper {
             position: relative;
-            width: 310px;
-            height: 460px;
-            margin: 0 auto 30px;
+            width: 320px;
+            height: 480px;
+            margin: 10px auto 35px;
             transform-style: preserve-3d;
             transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
@@ -162,103 +166,96 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            border-radius: 12px;
+            border-radius: 14px;
             backface-visibility: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
         }
 
-        /* Front Cover with author.jpg.jpg Image */
         .book-cover-front {
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             z-index: 2;
             overflow: hidden;
-            background-color: #000;
+            background-color: #120a1f;
         }
 
         .book-cover-front img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 12px;
+            border-radius: 14px;
             display: block;
         }
 
-        /* Book Inside Page Preview */
         .book-inside-page {
-            background: #fff8f0;
-            color: #2d1b0d;
-            padding: 35px 25px;
+            background: linear-gradient(135deg, #fffdfa 0%, #f4eae1 100%);
+            color: #2a1810;
+            padding: 40px 28px;
             transform: rotateY(180deg);
             display: flex;
             flex-direction: column;
             justify-content: center;
             text-align: justify;
-            border: 2px solid #e0d0c0;
-            box-shadow: inset 15px 0 30px rgba(0,0,0,0.15);
+            border: 2px solid #dfcfc0;
+            box-shadow: inset 18px 0 35px rgba(0,0,0,0.18);
         }
 
         .book-inside-page h4 {
             font-family: 'Abhaya Libre', serif;
-            font-size: 1.7rem;
+            font-size: 1.8rem;
             color: #8b0000;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             text-align: center;
+            border-bottom: 2px solid rgba(139, 0, 0, 0.2);
+            padding-bottom: 8px;
         }
 
         .book-inside-page p {
             font-family: 'Abhaya Libre', serif;
-            font-size: 1.18rem;
+            font-size: 1.2rem;
             line-height: 1.8;
-            color: #1a0f07;
+            color: #1d1008;
         }
 
         .controls-hint {
-            color: var(--accent-rose);
-            font-size: 0.95rem;
-            font-weight: 600;
+            color: var(--accent-pink);
+            font-size: 1rem;
+            font-weight: 700;
         }
 
         .btn-toggle-book {
-            margin-top: 15px;
-            padding: 12px 30px;
-            background: rgba(244, 63, 94, 0.2);
-            border: 1px solid var(--accent-rose);
+            margin-top: 18px;
+            padding: 14px 36px;
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.25), rgba(244, 63, 94, 0.1));
+            border: 1.5px solid var(--accent-pink);
             color: #fff;
             border-radius: 50px;
             font-weight: 700;
+            font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(244, 63, 94, 0.25);
         }
 
         .btn-toggle-book:hover {
-            background: var(--accent-rose);
-            transform: translateY(-2px);
+            background: var(--accent-pink);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(244, 63, 94, 0.5);
         }
 
-        /* MAIN SYNOPSIS CARD */
-        .main-card {
-            background: var(--bg-card);
-            backdrop-filter: blur(25px);
-            border: 1px solid var(--border-light);
-            border-radius: 32px;
-            padding: 55px;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
-            margin-bottom: 40px;
-        }
-
+        /* 3. SYNOPSIS SECTION */
         .novel-title {
             font-family: 'Abhaya Libre', serif;
-            font-size: 3.8rem;
+            font-size: 4rem;
             font-weight: 800;
             color: #ffffff;
             text-align: center;
             line-height: 1.1;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
 
         .quote-box {
             font-family: 'Abhaya Libre', serif;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: var(--accent-gold);
             font-style: italic;
             text-align: center;
@@ -269,59 +266,60 @@
 
         .synopsis-text {
             font-family: 'Abhaya Libre', serif;
-            font-size: 1.4rem;
+            font-size: 1.45rem;
             color: var(--text-body);
             text-align: justify;
-            margin-bottom: 24px;
-            line-height: 2;
+            margin-bottom: 26px;
+            line-height: 2.0;
         }
 
         .synopsis-text strong {
-            color: var(--accent-rose);
+            color: var(--accent-pink);
         }
 
         /* FOOTER */
         .footer-card {
             text-align: center;
-            padding: 45px 30px;
-            background: rgba(20, 14, 35, 0.8);
+            padding: 50px 30px;
+            background: rgba(18, 10, 31, 0.85);
             backdrop-filter: blur(20px);
-            border-radius: 28px;
+            border-radius: 32px;
             border: 1px solid var(--border-light);
         }
 
         .contact-btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            margin-top: 20px;
-            padding: 18px 42px;
+            gap: 12px;
+            margin-top: 22px;
+            padding: 20px 48px;
             background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
             color: #ffffff;
-            font-weight: 700;
-            font-size: 1.05rem;
+            font-weight: 800;
+            font-size: 1.1rem;
             text-decoration: none;
             border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(244, 63, 94, 0.4);
+            box-shadow: 0 12px 35px rgba(244, 63, 94, 0.45);
             transition: all 0.3s ease;
         }
 
         .contact-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(244, 63, 94, 0.6);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 18px 45px rgba(244, 63, 94, 0.65);
         }
 
         .copyright {
-            margin-top: 28px;
+            margin-top: 30px;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         @media (max-width: 768px) {
-            .author-name { font-size: 2.4rem; }
-            .novel-title { font-size: 2.7rem; }
-            .book-3d-wrapper { width: 260px; height: 390px; }
-            .main-card, .book-experience-card, .cover-showcase-card { padding: 30px 20px; }
+            .author-name { font-size: 2.6rem; }
+            .novel-title { font-size: 2.8rem; }
+            .book-3d-wrapper { width: 270px; height: 410px; }
+            .glass-card { padding: 30px 20px; border-radius: 24px; }
+            .synopsis-text { font-size: 1.25rem; }
         }
     </style>
 </head>
@@ -333,28 +331,28 @@
         
         <!-- Header -->
         <header class="hero-header">
-            <span class="author-badge">Official Author Page</span>
+            <span class="author-badge">✨ Official Author Page</span>
             <h1 class="author-name">KAVINDA D SENANAYAKA</h1>
             <p class="author-tagline">Author of "Mandaram Kathava"</p>
         </header>
 
-        <!-- 1. FULL COVER SHOWCASE (UPDATED TO author.jpg.jpg) -->
-        <section class="cover-showcase-card">
-            <div class="cover-title-tag">✨ Official Book Cover Showcase</div>
+        <!-- 1. FULL COVER DESIGN SHOWCASE (authors.jpg.png) -->
+        <section class="glass-card">
+            <div class="section-tag">🎨 Official Full Cover Design</div>
             <div class="full-cover-wrapper">
-                <img src="author.jpg.jpg" alt="මන්දාරම් කතාවක් Full Cover Design" class="full-cover-img">
+                <img src="authors.jpg.png" alt="මන්දාරම් කතාව Full Cover Art" class="full-cover-img">
             </div>
         </section>
 
-        <!-- 2. 3D INTERACTIVE FLIP BOOK (ALSO USING author.jpg.jpg) -->
-        <section class="book-experience-card">
-            <div class="cover-title-tag">📖 Interactive 3D Reading Preview</div>
+        <!-- 2. 3D INTERACTIVE FLIP BOOK (author.jpg.png) -->
+        <section class="glass-card">
+            <div class="section-tag">📖 Interactive 3D Book Preview</div>
             
             <div class="book-3d-wrapper" id="flipBook" onclick="toggleBook()">
                 
                 <!-- Front Cover -->
                 <div class="book-cover-front">
-                    <img src="author.jpg.jpg" alt="මන්දාරම් කතාවක් Front Cover Image">
+                    <img src="author.jpg.png" alt="මන්දාරම් කතාවක් Book Front Cover">
                 </div>
 
                 <!-- Inside Preview Page -->
@@ -367,12 +365,12 @@
 
             </div>
 
-            <p class="controls-hint">✨ පොත උඩ ක්ලික් කර පිටුව පෙරළා බලන්න!</p>
+            <p class="controls-hint">✨ පොත උඩ Click කර පිටුව පෙරළා බලන්න!</p>
             <button class="btn-toggle-book" onclick="toggleBook()">📖 පොත පෙරළන්න / වසන්න</button>
         </section>
 
         <!-- SYNOPSIS SECTION -->
-        <main class="main-card">
+        <main class="glass-card" style="text-align: left;">
             <h2 class="novel-title">මන්දාරම් කතාව</h2>
             <p class="quote-box">"හන්තාන අහස යට ලියැවුණු, සරසවි වසන්තයක සදාකාලික මතකය..."</p>
 
@@ -399,8 +397,8 @@
 
         <!-- FOOTER & ORDER BUTTON -->
         <footer class="footer-card">
-            <h3 style="font-size: 1.5rem; color: #fff; margin-bottom: 8px;">පොත ඇණවුම් කිරීමට / කර්තෘ සම්බන්ධ කරගැනීමට</h3>
-            <p style="color: var(--text-muted); font-size: 0.95rem;">ප්‍රකාශනය සහ බෙදාහැරීම් පිළිබඳ විමසන්න.</p>
+            <h3 style="font-size: 1.6rem; color: #fff; margin-bottom: 8px;">පොත ඇණවුම් කිරීමට / කර්තෘ සම්බන්ධ කරගැනීමට</h3>
+            <p style="color: var(--text-muted); font-size: 1rem;">ප්‍රකාශනය සහ බෙදාහැරීම් පිළිබඳ විමසන්න.</p>
             
             <div>
                 <a href="mailto:Kavindadeshan960@gmail.com" class="contact-btn">
