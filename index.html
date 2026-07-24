@@ -45,7 +45,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('author.jpg.png');
+            background-image: url('author.jpg.jpg');
             background-size: cover;
             background-position: center;
             filter: blur(40px) brightness(0.2);
@@ -95,7 +95,7 @@
             font-weight: 300;
         }
 
-        /* 1. ORIGINAL FULL COVER DESIGN SHOWCASE */
+        /* 1. FULL COVER DESIGN SHOWCASE */
         .cover-showcase-card {
             background: var(--bg-card);
             backdrop-filter: blur(25px);
@@ -126,12 +126,12 @@
 
         .full-cover-img {
             width: 100%;
-            max-width: 900px;
+            max-width: 600px;
             height: auto;
             display: block;
         }
 
-        /* 2. REAL 3D BOOK FLIP EXPERIENCE WITH NEW COVER IMAGE */
+        /* 2. REAL 3D BOOK FLIP EXPERIENCE */
         .book-experience-card {
             background: var(--bg-card);
             backdrop-filter: blur(25px);
@@ -167,7 +167,7 @@
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
         }
 
-        /* Front Cover with new author.jpg.jpg Image */
+        /* Front Cover with author.jpg.jpg Image */
         .book-cover-front {
             border: 1px solid rgba(255, 255, 255, 0.3);
             z-index: 2;
@@ -338,21 +338,21 @@
             <p class="author-tagline">Author of "Mandaram Kathava"</p>
         </header>
 
-        <!-- 1. ORIGINAL COVER IMAGE SHOWCASE -->
+        <!-- 1. FULL COVER SHOWCASE (UPDATED TO author.jpg.jpg) -->
         <section class="cover-showcase-card">
-            <div class="cover-title-tag">✨ Official Full Cover Showcase</div>
+            <div class="cover-title-tag">✨ Official Book Cover Showcase</div>
             <div class="full-cover-wrapper">
-                <img src="author.jpg.png" alt="මන්දාරම් කතාව Full Cover Design" class="full-cover-img">
+                <img src="author.jpg.jpg" alt="මන්දාරම් කතාවක් Full Cover Design" class="full-cover-img">
             </div>
         </section>
 
-        <!-- 2. 3D INTERACTIVE FLIP BOOK (WITH NEW FRONT COVER IMAGE) -->
+        <!-- 2. 3D INTERACTIVE FLIP BOOK (ALSO USING author.jpg.jpg) -->
         <section class="book-experience-card">
             <div class="cover-title-tag">📖 Interactive 3D Reading Preview</div>
             
             <div class="book-3d-wrapper" id="flipBook" onclick="toggleBook()">
                 
-                <!-- Front Cover with 'author.jpg.jpg' -->
+                <!-- Front Cover -->
                 <div class="book-cover-front">
                     <img src="author.jpg.jpg" alt="මන්දාරම් කතාවක් Front Cover Image">
                 </div>
