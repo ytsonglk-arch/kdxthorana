@@ -12,9 +12,9 @@
 
     <style>
         :root {
-            --bg-primary: #070a12;
+            --bg-primary: #030712;
             --bg-card: rgba(15, 23, 42, 0.85);
-            --accent-gold: #fbbf24;
+            --accent-gold: #f59e0b;
             --accent-blue: #38bdf8;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
@@ -37,7 +37,7 @@
             overflow-x: hidden;
         }
 
-        /* Full Background Photo */
+        /* Ambient Background Blur Layer */
         .bg-background-image {
             position: fixed;
             top: 0;
@@ -47,22 +47,21 @@
             background-image: url('author.jpg.png');
             background-size: cover;
             background-position: center;
-            filter: blur(25px) brightness(0.22);
-            transform: scale(1.08);
+            filter: blur(30px) brightness(0.2);
+            transform: scale(1.1);
             z-index: -1;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1050px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 50px 20px;
         }
 
-        /* Header Section */
+        /* Hero Header */
         .hero-header {
             text-align: center;
-            padding: 30px 20px;
-            margin-bottom: 30px;
+            padding: 20px 0 35px;
         }
 
         .author-badge {
@@ -72,7 +71,7 @@
             border: 1px solid rgba(56, 189, 248, 0.3);
             border-radius: 50px;
             color: var(--accent-blue);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -80,64 +79,21 @@
         }
 
         .author-name {
-            font-size: 3rem;
+            font-size: 3.2rem;
             font-weight: 800;
             letter-spacing: 2px;
             color: #ffffff;
             margin-bottom: 5px;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            text-shadow: 0 4px 25px rgba(0,0,0,0.6);
         }
 
         .author-tagline {
             color: var(--text-muted);
             font-size: 1.15rem;
+            font-weight: 300;
         }
 
-        /* Main Novel Layout */
-        .main-card {
-            background: var(--bg-card);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border-light);
-            border-radius: 28px;
-            padding: 50px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-            margin-bottom: 40px;
-        }
-
-        .novel-title {
-            font-family: 'Abhaya Libre', serif;
-            font-size: 3.2rem;
-            font-weight: 800;
-            color: #ffffff;
-            text-align: center;
-            line-height: 1.1;
-            margin-bottom: 10px;
-        }
-
-        .quote-box {
-            font-family: 'Abhaya Libre', serif;
-            font-size: 1.4rem;
-            color: var(--accent-gold);
-            font-style: italic;
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .synopsis-text {
-            font-family: 'Abhaya Libre', serif;
-            font-size: 1.3rem;
-            color: #e2e8f0;
-            text-align: justify;
-            margin-bottom: 20px;
-            line-height: 1.95;
-        }
-
-        .synopsis-text strong {
-            color: var(--accent-blue);
-        }
-
-        /* Cover Showcase Section (Large View) */
+        /* Top Featured Cover Design Section */
         .cover-showcase-card {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
@@ -147,47 +103,109 @@
             padding: 40px;
             text-align: center;
             margin-bottom: 40px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
         }
 
-        .section-subtitle {
-            font-size: 1.5rem;
+        .cover-title-tag {
+            font-size: 1.1rem;
             font-weight: 700;
-            color: var(--accent-blue);
-            margin-bottom: 25px;
-            letter-spacing: 1px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .full-cover-wrapper {
+            display: inline-block;
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .full-cover-wrapper:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 30px 60px rgba(56, 189, 248, 0.25);
+            border-color: rgba(56, 189, 248, 0.5);
         }
 
         .full-cover-img {
             width: 100%;
-            max-width: 850px;
-            border-radius: 16px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
-            transition: transform 0.3s ease;
+            max-width: 900px;
+            height: auto;
+            display: block;
         }
 
-        .full-cover-img:hover {
-            transform: scale(1.02);
+        /* Main Novel Synopsis Card */
+        .main-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-light);
+            border-radius: 28px;
+            padding: 55px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+            margin-bottom: 40px;
         }
 
-        /* Contact & Footer */
+        .novel-title {
+            font-family: 'Abhaya Libre', serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            text-align: center;
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+
+        .quote-box {
+            font-family: 'Abhaya Libre', serif;
+            font-size: 1.45rem;
+            color: var(--accent-gold);
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .synopsis-text {
+            font-family: 'Abhaya Libre', serif;
+            font-size: 1.35rem;
+            color: #e2e8f0;
+            text-align: justify;
+            margin-bottom: 22px;
+            line-height: 2;
+        }
+
+        .synopsis-text strong {
+            color: var(--accent-blue);
+        }
+
+        /* Footer & Order Button */
         .footer-card {
             text-align: center;
-            padding: 30px;
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
+            padding: 35px;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            border-radius: 24px;
             border: 1px solid var(--border-light);
         }
 
         .contact-btn {
             display: inline-block;
-            margin-top: 12px;
-            padding: 14px 32px;
+            margin-top: 15px;
+            padding: 16px 36px;
             background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
             color: #ffffff;
             font-weight: 700;
+            font-size: 1rem;
             text-decoration: none;
             border-radius: 50px;
             box-shadow: 0 6px 20px rgba(56, 189, 248, 0.35);
@@ -195,78 +213,87 @@
         }
 
         .contact-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(56, 189, 248, 0.5);
         }
 
         .copyright {
-            margin-top: 20px;
+            margin-top: 22px;
             color: var(--text-muted);
             font-size: 0.85rem;
         }
 
+        /* Responsive Mobile Layout */
         @media (max-width: 768px) {
             .author-name {
                 font-size: 2.2rem;
             }
             .novel-title {
-                font-size: 2.4rem;
+                font-size: 2.5rem;
+            }
+            .quote-box {
+                font-size: 1.25rem;
             }
             .main-card, .cover-showcase-card {
                 padding: 25px 20px;
+            }
+            .synopsis-text {
+                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Background Layer -->
+    <!-- Ambient Dark Background -->
     <div class="bg-background-image"></div>
 
     <div class="container">
         
         <!-- Header -->
         <header class="hero-header">
-            <span class="author-badge">Official Novelist Page</span>
+            <span class="author-badge">Official Author Page</span>
             <h1 class="author-name">KAVINDA D SENANAYAKA</h1>
             <p class="author-tagline">Author of "Mandaram Kathava"</p>
         </header>
 
-        <!-- Main Novel Content Section -->
+        <!-- 1. FIRST SECTION: FULL COVER DESIGN -->
+        <section class="cover-showcase-card">
+            <div class="cover-title-tag">✨ Book Cover Design</div>
+            <div class="full-cover-wrapper">
+                <img src="author.jpg.png" alt="මන්දාරම් කතාව Full Cover Design - Kavinda D Senanayaka" class="full-cover-img">
+            </div>
+        </section>
+
+        <!-- 2. SECOND SECTION: NOVEL DETAILS & SYNOPSIS -->
         <main class="main-card">
             <h2 class="novel-title">මන්දාරම් කතාව</h2>
             <p class="quote-box">"හන්තාන අහස යට ලියැවුණු, සරසවි වසන්තයක සදාකාලික මතකය..."</p>
 
             <p class="synopsis-text">
-                පෙරාදෙණිය විශ්වවිද්‍යාලයේ ඓතිහාසික සරසවි බිම, හුදෙක් උපාධියක් පිරිනමන තක්සලාවක් පමණක් නොවේ[cite: 1]. එය ජීවිතය, තාරුණ්‍යය, ප්‍රේමය සහ ආත්මීය සහෝදරත්වය කියාදෙන තෝතැන්නකි[cite: 1].
+                පෙරාදෙණිය විශ්වවිද්‍යාලයේ ඓතිහාසික සරසවි බිම, හුදෙක් උපාධියක් පිරිනමන තක්සලාවක් පමණක් නොවේ. එය ජීවිතය, තාරුණ්‍යය, ප්‍රේමය සහ ආත්මීය සහෝදරත්වය කියාදෙන තෝතැන්නකි.
             </p>
 
             <p class="synopsis-text">
-                රැග් සමයේ කටුක බව මැද, සුප්‍රසිද්ධ අක්බාර් පාලම මතදී දේශ්ට මුණගැසෙන සවින් සහ කපී ඔහුගේ සදාකාලික සහෝදරයන් බවට පත් වෙති[cite: 1]. මීදුම පිරුණු ලෝවර් ලේන් දිගේ ඇවිද ගිය ඒ සුන්දර හැන්දෑවන් ඔවුන්ගේ තාරුණ්‍යය බලාපොරොත්තු වලින් පුරවාලයි[cite: 1].
+                රැග් සමයේ කටුක බව මැද, සුප්‍රසිද්ධ අක්බාර් පාලම මතදී දේශ්ට මුණගැසෙන සවින් සහ කපී ඔහුගේ සදාකාලික සහෝදරයන් බවට පත් වෙති. මීදුම පිරුණු ලෝවර් ලේන් දිගේ ඇවිද ගිය ඒ සුන්දර හැන්දෑවන් ඔවුන්ගේ තාරුණ්‍යය බලාපොරොත්තු වලින් පුරවාලයි.
             </p>
 
             <p class="synopsis-text">
-                මේ සුන්දර මිත්‍රත්වයේ රිද්මය මැදට, වසන්තයේ පිපුණු කඳුරු මලක් මෙන් නිම්නා පැමිණෙන්නේ දේශ්ගේ හදවතේ ආදරයේ නොමැකෙන සිතුවම් අඳිමිනි[cite: 1]. හන්තාන කඳු මුදුනේදී ඔවුන් හුවමාරු කරගත් රහස් පොරොන්දු, නුවර වැව රවුමේ සුදු වලාකුළු බැම්ම අසල මැවූ සිහින, ඔවුන්ගේ ප්‍රේමයට සදාකාලිකත්වයේ මුද්‍රාව තබයි[cite: 1].
+                මේ සුන්දර මිත්‍රත්වයේ රිද්මය මැදට, වසන්තයේ පිපුණු කඳුරු මලක් මෙන් නිම්නා පැමිණෙන්නේ දේශ්ගේ හදවතේ ආදරයේ නොමැකෙන සිතුවම් අඳිමිනි. හන්තාන කඳු මුදුනේදී ඔවුන් හුවමාරු කරගත් රහස් පොරොන්දු, නුවර වැව රවුමේ සුදු වලාකුළු බැම්ම අසල මැවූ සිහින, ඔවුන්ගේ ප්‍රේමයට සදාකාලිකත්වයේ මුද්‍රාව තබයි.
             </p>
 
             <p class="synopsis-text">
-                නමුත්, සොබාදහම සැමවිටම කරුණාවන්ත නොවේ[cite: 1]. ජීවිතයේ සුන්දරම වසන්තය උදාවෙද්දී කිසිවෙකු නොසිතූ අයුරින් පැමිණෙන කුරිරු දෛවයේ කුණාටුවක් ඔවුන්ගේ මුළු ලෝකයම උඩුයටිකුරු කරයි[cite: 1].
+                නමුත්, සොබාදහම සැමවිටම කරුණාවන්ත නොවේ. ජීවිතයේ සුන්දරම වසන්තය උදාවෙද්දී කිසිවෙකු නොසිතූ අයුරින් පැමිණෙන කුරිරු දෛවයේ කුණාටුවක් ඔවුන්ගේ මුළු ලෝකයම උඩුයටිකුරු කරයි.
             </p>
 
             <p class="synopsis-text">
-                ආදරයේ අතිශය සුන්දර සුසංයෝගයත්, ජීවිතයේ අනිත්‍යතාව පිළිබඳ පරම සත්‍යයන් අපූරුවට පසක් කරලන, හදවතේ ගැඹුරුම තැන් ස්පර්ශ කරන සංවේදී ආදර අන්දරය — <strong>"මන්දාරම් කතාව"</strong>[cite: 1].
+                ආදරයේ අතිශය සුන්දර සුසංයෝගයත්, ජීවිතයේ අනිත්‍යතාව පිළිබඳ පරම සත්‍යයන් අපූරුවට පසක් කරලන, හදවතේ ගැඹුරුම තැන් ස්පර්ශ කරන සංවේදී ආදර අන්දරය — <strong>"මන්දාරම් කතාව"</strong>.
             </p>
         </main>
 
-        <!-- Full Cover Design Showcase Section -->
-        <section class="cover-showcase-card">
-            <h3 class="section-subtitle">📖 Full Cover Design</h3>
-            <img src="author.jpg.png" alt="මන්දාරම් කතාව Full Cover Design - Kavinda D Senanayaka" class="full-cover-img">
-        </section>
-
-        <!-- Footer / Contact -->
+        <!-- 3. FOOTER & CONTACT -->
         <footer class="footer-card">
-            <p style="color: #cbd5e1; margin-bottom: 10px;">කර්තෘ සමඟ සම්බන්ධ වීමට / පොත ඇණවුම් කිරීමට:</p>
+            <p style="color: #cbd5e1; font-size: 1.05rem;">කර්තෘ සමඟ සම්බන්ධ වීමට / පොත ඇණවුම් කිරීමට:</p>
             <a href="mailto:Kavindadeshan960@gmail.com" class="contact-btn">✉ Email: Kavindadeshan960@gmail.com</a>
             <p class="copyright">&copy; 2026 KAVINDA D SENANAYAKA. All Rights Reserved.</p>
         </footer>
