@@ -39,7 +39,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated Ambient Background */
         .bg-background-image {
             position: fixed;
             top: 0;
@@ -91,17 +90,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 8px;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .author-tagline {
             color: var(--text-muted);
             font-size: 1.25rem;
             font-weight: 400;
-            letter-spacing: 1px;
         }
 
-        /* Section Styling */
         .glass-card {
             background: var(--bg-card);
             backdrop-filter: blur(30px);
@@ -111,9 +107,7 @@
             padding: 50px;
             text-align: center;
             margin-bottom: 45px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
         }
 
         .section-tag {
@@ -126,18 +120,13 @@
             display: inline-block;
         }
 
-        /* 1. FULL COVER DESIGN SHOWCASE (authors.jpg.png) */
+        /* 1. FULL COVER DESIGN SHOWCASE */
         .full-cover-wrapper {
             display: inline-block;
             border-radius: 24px;
             overflow: hidden;
             box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95), 0 0 40px var(--accent-glow);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.4s ease;
-        }
-
-        .full-cover-wrapper:hover {
-            transform: translateY(-5px) scale(1.01);
         }
 
         .full-cover-img {
@@ -147,102 +136,136 @@
             display: block;
         }
 
-        /* 2. 3D INTERACTIVE FLIP BOOK (author.jpg.png) */
-        .book-3d-wrapper {
+        /* 2. MULTI-PAGE 3D BOOK STYLING */
+        .book-container-3d {
+            perspective: 1500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0 30px;
+        }
+
+        .book-3d {
             position: relative;
             width: 320px;
             height: 480px;
-            margin: 10px auto 35px;
             transform-style: preserve-3d;
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+            border-radius: 12px;
         }
 
-        .book-3d-wrapper.open {
-            transform: rotateY(-160deg);
-        }
-
-        .book-cover-front, .book-inside-page {
+        /* Book Cover (author.jpg.png) */
+        .book-cover {
             position: absolute;
             width: 100%;
             height: 100%;
-            border-radius: 14px;
-            backface-visibility: hidden;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
-        }
-
-        .book-cover-front {
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            z-index: 2;
+            border-radius: 12px;
+            z-index: 20;
+            transform-origin: left;
+            transition: transform 0.8s cubic-bezier(0.15, 1, 0.3, 1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             overflow: hidden;
-            background-color: #120a1f;
+            background: #10051d;
+            cursor: pointer;
         }
 
-        .book-cover-front img {
+        .book-cover img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 14px;
-            display: block;
         }
 
-        .book-inside-page {
+        .book-cover.opened {
+            transform: rotateY(-160deg);
+            z-index: 1;
+        }
+
+        /* Inside Pages */
+        .book-page-inside {
+            position: absolute;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(135deg, #fffdfa 0%, #f4eae1 100%);
             color: #2a1810;
-            padding: 40px 28px;
-            transform: rotateY(180deg);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: justify;
+            padding: 35px 25px;
+            border-radius: 12px;
             border: 2px solid #dfcfc0;
-            box-shadow: inset 18px 0 35px rgba(0,0,0,0.18);
+            box-shadow: inset 18px 0 35px rgba(0,0,0,0.12);
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: justify;
         }
 
-        .book-inside-page h4 {
+        .book-page-inside.active {
+            display: flex;
+        }
+
+        .book-page-inside h4 {
             font-family: 'Abhaya Libre', serif;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: #8b0000;
-            margin-bottom: 15px;
             text-align: center;
             border-bottom: 2px solid rgba(139, 0, 0, 0.2);
-            padding-bottom: 8px;
+            padding-bottom: 6px;
         }
 
-        .book-inside-page p {
+        .book-page-content {
             font-family: 'Abhaya Libre', serif;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             line-height: 1.8;
             color: #1d1008;
+            flex-grow: 1;
+            margin-top: 15px;
         }
 
-        .controls-hint {
-            color: var(--accent-pink);
-            font-size: 1rem;
+        .page-number-tag {
+            text-align: center;
+            font-size: 0.9rem;
             font-weight: 700;
+            color: #8b0000;
+            margin-top: 10px;
         }
 
-        .btn-toggle-book {
-            margin-top: 18px;
-            padding: 14px 36px;
+        /* Book Navigation Controls */
+        .book-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn-page {
+            padding: 12px 26px;
             background: linear-gradient(135deg, rgba(244, 63, 94, 0.25), rgba(244, 63, 94, 0.1));
             border: 1.5px solid var(--accent-pink);
             color: #fff;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(244, 63, 94, 0.25);
         }
 
-        .btn-toggle-book:hover {
+        .btn-page:hover:not(:disabled) {
             background: var(--accent-pink);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(244, 63, 94, 0.5);
+            transform: translateY(-2px);
         }
 
-        /* 3. SYNOPSIS SECTION */
+        .btn-page:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .page-indicator {
+            color: var(--accent-gold);
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        /* SYNOPSIS SECTION */
         .novel-title {
             font-family: 'Abhaya Libre', serif;
             font-size: 4rem;
@@ -317,8 +340,8 @@
         @media (max-width: 768px) {
             .author-name { font-size: 2.6rem; }
             .novel-title { font-size: 2.8rem; }
-            .book-3d-wrapper { width: 270px; height: 410px; }
-            .glass-card { padding: 30px 20px; border-radius: 24px; }
+            .book-3d { width: 270px; height: 420px; }
+            .glass-card { padding: 30px 20px; }
             .synopsis-text { font-size: 1.25rem; }
         }
     </style>
@@ -333,53 +356,130 @@
         <header class="hero-header">
             <span class="author-badge">✨ Official Author Page</span>
             <h1 class="author-name">KAVINDA D SENANAYAKA</h1>
-            <p class="author-tagline">Author of "Mandaram Kathavak"</p>
+            <p class="author-tagline">Author of "Mandaram Kathava"</p>
         </header>
 
-        <!-- 1. FULL COVER DESIGN SHOWCASE (authors.jpg.png) -->
+        <!-- 1. FULL COVER DESIGN SHOWCASE -->
         <section class="glass-card">
             <div class="section-tag">🎨 Official Full Cover Design</div>
             <div class="full-cover-wrapper">
-                <img src="authors.jpg.png" alt="මන්දාරම් කතාවක් Full Cover Art" class="full-cover-img">
+                <img src="authors.jpg.png" alt="මන්දාරම් කතාව Full Cover Art" class="full-cover-img">
             </div>
         </section>
 
-        <!-- 2. 3D INTERACTIVE FLIP BOOK (author.jpg.png) -->
+        <!-- 2. 10-PAGE 3D INTERACTIVE FLIP BOOK -->
         <section class="glass-card">
-            <div class="section-tag">📖 Interactive 3D Book Preview</div>
+            <div class="section-tag">📖 Interactive 10-Page Book Reading Preview</div>
             
-            <div class="book-3d-wrapper" id="flipBook" onclick="toggleBook()">
-                
-                <!-- Front Cover -->
-                <div class="book-cover-front">
-                    <img src="author.jpg.png" alt="මන්දාරම් කතාවක් Book Front Cover">
-                </div>
+            <div class="book-container-3d">
+                <div class="book-3d">
+                    
+                    <!-- Cover Page -->
+                    <div class="book-cover" id="bookCover" onclick="openBook()">
+                        <img src="author.jpg.png" alt="මන්දාරම් කතාව Book Front Cover">
+                    </div>
 
-                <!-- Inside Preview Page -->
-                <div class="book-inside-page">
-                    <h4>මන්දාරම් කතාවක් "මචං කද්දශ්... උඹ කමකහම තනියම ඇවිදින්න එපො බං. අපි 
-උඹව හැමතැනම කහේවො," සචින්කේ කටහකේ ිබුකේ ෙැඩි 
-කනගොටුවකි. 
-"කවීෂ... සචින්... මට හැමතැනම නිම්නොව කේනවො බං. කම් 
-ගස් වැල්, පොරවල් හැමකද්දම මට කෑගහලො කියන්කන් එයොකේ 
-ගැන විතරයි. මට කම් මතකයන්කගන් කබ්ිලො ඉන්න බෑ බං. 
-මකේ ඔලුව පිපිකරන්න වකේ එන්කන," කද්දශ් මිතුරන් 
-කෙකෙනොව බෙොකගන සරසවි බිම මැෙම හඬන්නට විය. 
-කවීෂ කද්දශ්කේ පිටට තට්ටටු කරමින් ඔහුව සනසන්නට 
-උත්සොහ කකළ්ය. "අපි ෙන්නවො කද්දශ්... නිම්නො කියන්කන් 
-අකේ ජීවිතවලිනුත් අඩේ. හැබැයි උඹ කමකහම ජීවිතය නැි 
-කරගත්කතොත් නිම්නො උඩ ඉඳන් අඬයි බං. අපි කම් මතකයන් 
-එේකම ජීවත් කවන්න පුරුදු කවන්න ඕකන්. ඒක තමයි 
-කසොබොෙහකම් නියමය."</h4>
-                    <p>
-                        "හන්තාන පාමුලින් හමා ආ සීතල සුළඟ අක්බාර් පාලම මත රැඳී සිටි අපව වෙළා ගනිද්දී, ලෝවර් ලේන් එක දෙසින් ඇසුණු මෘදු පියවර හඬ අපගේ අවධානය පැහැර ගත්තේය. මීදුම් සාලුව අතරින් මතුවූ ඒ රුව, මගේ අනාගත දිනපොතේ සෑම පිටුවක්ම වෙනස් කිරීමට යන වග එදින මා මොහොතකටවත් නොසිතුවෙමි..."
-                    </p>
-                </div>
+                    <!-- Page 1 -->
+                    <div class="book-page-inside active" id="page-1">
+                        <h4>පිටුව 01 - හන්තාන අහස</h4>
+                        <div class="book-page-content">
+                            "හන්තාන පාමුලින් හමා ආ සීතල සුළඟ අක්බාර් පාලම මත රැඳී සිටි අපව වෙළා ගනිද්දී, ලෝවර් ලේන් එක දෙසින් ඇසුණු මෘදු පියවර හඬ අපගේ අවධානය පැහැර ගත්තේය. මීදුම් සාලුව අතරින් මතුවූ ඒ රුව, මගේ අනාගත දිනපොතේ සෑම පිටුවක්ම වෙනස් කිරීමට යන වග එදින මා මොහොතකටවත් නොසිතුවෙමි..."
+                        </div>
+                        <div class="page-number-tag">- Page 01 -</div>
+                    </div>
 
+                    <!-- Page 2 -->
+                    <div class="book-page-inside" id="page-2">
+                        <h4>පිටුව 02 - අක්බාර් පාලම</h4>
+                        <div class="book-page-content">
+                            "සරසවි බිමේ පළමු දිනයේදීම අපට මුහුණ දීමට සිදු වූ අභියෝගයන් අතිමහත්ය. රැග් සමයේ කටුක බව මැද, සුප්‍රසිද්ධ අක්බාර් පාලම යටින් ගලා බසින මහවැලි නදිය දෙස බලා සිටි සවින්ගේ දෑස්වල තිබුණේ නොබියව ජීවිතයට මුහුණ දීමේ නොසැලෙන අධිෂ්ඨානයයි."
+                        </div>
+                        <div class="page-number-tag">- Page 02 -</div>
+                    </div>
+
+                    <!-- Page 3 -->
+                    <div class="book-page-inside" id="page-3">
+                        <h4>පිටුව 03 - ලෝවර් ලේන්</h4>
+                        <div class="book-page-content">
+                            "හැන්දෑවේ අඳුර වැටෙද්දී ලෝවර් ලේන් එක දිගේ ඇවිද යාම අපේ දෛනික පුරුද්දක් බවට පත් විය. ගස් අතරින් පෙරී ආ කහ පැහැති වීදි ලාම්පු එළිය හමුවේ, අපේ අනාගත සිහින සහ අරමුණු ගැන කතා කිරීමට තරම් අපගේ සිත් නිදහස් වී තිබුණි."
+                        </div>
+                        <div class="page-number-tag">- Page 03 -</div>
+                    </div>
+
+                    <!-- Page 4 -->
+                    <div class="book-page-inside" id="page-4">
+                        <h4>පිටුව 04 - වසන්තයේ පිපුණු මල</h4>
+                        <div class="book-page-content">
+                            "නිම්නා ප්‍රථම වතාවට පුස්තකාලය අසලදී මට මුණගැසුණු මොහොතේ, මුළු ලෝකයම මොහොතකට නතර වූවාක් මෙන් මට දැනුණි. ඇගේ මන්දහාසය හදවතේ ගැඹුරුම තැනක සදාකාලිකව සටහන් විය."
+                        </div>
+                        <div class="page-number-tag">- Page 04 -</div>
+                    </div>
+
+                    <!-- Page 5 -->
+                    <div class="book-page-inside" id="page-5">
+                        <h4>පිටුව 05 - රහස් පොරොන්දු</h4>
+                        <div class="book-page-content">
+                            "හන්තාන කඳු මුදුනට හිරු බැස යන මොහොතේ, අප දෙදෙනා අතර ඇති වූ නිහඬ සංවාදය වචන දහසකට වඩා ගැඹුරු විය. 'අපි කවදාවත් වෙන් නොවී ඉඳිමු,' ඇය හිමින් කීවාය."
+                        </div>
+                        <div class="page-number-tag">- Page 05 -</div>
+                    </div>
+
+                    <!-- Page 6 -->
+                    <div class="book-page-inside" id="page-6">
+                        <h4>පිටුව 06 - නුවර වැව රවුම</h4>
+                        <div class="book-page-content">
+                            "නුවර වැව රවුමේ සුදු වලාකුළු බැම්ම අසල වාඩි වී සිටි සන්ධ්‍යාවන් අපට ගෙන ආවේ අමුතුම ශාන්ත බවකි. දිය මත ඇඳෙන තාරකාවල ඡායාවන් දෙස බලමින් අප පැය ගණනක් පෙම් කළෙමු."
+                        </div>
+                        <div class="page-number-tag">- Page 06 -</div>
+                    </div>
+
+                    <!-- Page 7 -->
+                    <div class="book-page-inside" id="page-7">
+                        <h4>පිටුව 07 - නොසිතූ කුණාටුව</h4>
+                        <div class="book-page-content">
+                            "නමුත් සොබාදහමේ නියමයන් වෙනස් කිරීම අපට කළ නොහැක. කිසිවෙකු නොසිතූ මොහොතක කඩා වැටුණු ඒ අඳුරු ආරංචිය, අපගේ වසන්තය එකී මෙකී නොලබා අළු කර දැමීමට සමත් විය."
+                        </div>
+                        <div class="page-number-tag">- Page 07 -</div>
+                    </div>
+
+                    <!-- Page 8 -->
+                    <div class="book-page-inside" id="page-8">
+                        <h4>පිටුව 08 - අනිත්‍යයේ පසක් වීම</h4>
+                        <div class="book-page-content">
+                            "ජීවිතයේ සුන්දරම දේවල් පවා සැමදා නොපවතින බව පසක් කරගැනීමට සිදුවීම තරම් තවත් වේදනාවක් නොමැත. දෛවයේ කුරිරු සෙල්ලම හමුවේ අපට ඉතිරි වූයේ මතකයන් සමුදායක් පමණි."
+                        </div>
+                        <div class="page-number-tag">- Page 08 -</div>
+                    </div>
+
+                    <!-- Page 9 -->
+                    <div class="book-page-inside" id="page-9">
+                        <h4>පිටුව 09 - සදාකාලික ප්‍රේමය</h4>
+                        <div class="book-page-content">
+                            "කාලය ගෙවී ගියද, හන්තාන කඳු වැටිය තවමත් එලෙසමය. මන්දාරම් වැස්ස වැටෙන සෑම මොහොතකම ඇගේ සුවඳ මට නැවත නැවතත් දැනෙන්නේ සදාකාලික මතක සටහනක් ලෙසිනි."
+                        </div>
+                        <div class="page-number-tag">- Page 09 -</div>
+                    </div>
+
+                    <!-- Page 10 -->
+                    <div class="book-page-inside" id="page-10">
+                        <h4>පිටුව 10 - අවසානය සහ ආරම්භය</h4>
+                        <div class="book-page-content">
+                            "සෑම කතාවකටම අවසානයක් ඇතත්, සැබෑ ආදරයට අවසානයක් නැත. 'මන්දාරම් කතාව' යනු හදවත් තුළ සදාකාලිකව ජීවත් වන අපගේ ජීවන සෙවනැල්ලයි."
+                        </div>
+                        <div class="page-number-tag">- Page 10 -</div>
+                    </div>
+
+                </div>
             </div>
 
-            <p class="controls-hint">✨ පොත උඩ Click කර පිටුව පෙරළා බලන්න!</p>
-            <button class="btn-toggle-book" onclick="toggleBook()">📖 පොත පෙරළන්න / වසන්න</button>
+            <!-- Page Navigation Controls -->
+            <div class="book-controls">
+                <button class="btn-page" id="prevBtn" onclick="prevPage()" disabled>⬅ පෙර පිටුව</button>
+                <span class="page-indicator" id="pageIndicator">පිටුව: 01 / 10</span>
+                <button class="btn-page" id="nextBtn" onclick="nextPage()">ඊළඟ පිටුව ➡</button>
+            </div>
+            
+            <p style="margin-top: 15px; color: var(--text-muted); font-size: 0.85rem;">💡 පොත මත ක්ලික් කර කවරය විවෘත කරන්න හෝ වසන්න.</p>
         </section>
 
         <!-- SYNOPSIS SECTION -->
@@ -425,9 +525,48 @@
     </div>
 
     <script>
-        function toggleBook() {
-            const book = document.getElementById('flipBook');
-            book.classList.toggle('open');
+        let currentPage = 1;
+        const totalPages = 10;
+        let isOpened = false;
+
+        function openBook() {
+            const cover = document.getElementById('bookCover');
+            isOpened = !isOpened;
+            if (isOpened) {
+                cover.classList.add('opened');
+            } else {
+                cover.classList.remove('opened');
+            }
+        }
+
+        function updatePages() {
+            for (let i = 1; i <= totalPages; i++) {
+                const page = document.getElementById(`page-${i}`);
+                if (i === currentPage) {
+                    page.classList.add('active');
+                } else {
+                    page.classList.remove('active');
+                }
+            }
+
+            document.getElementById('pageIndicator').innerText = `පිටුව: ${currentPage < 10 ? '0' + currentPage : currentPage} / ${totalPages}`;
+            document.getElementById('prevBtn').disabled = (currentPage === 1);
+            document.getElementById('nextBtn').disabled = (currentPage === totalPages);
+        }
+
+        function nextPage() {
+            if (!isOpened) openBook();
+            if (currentPage < totalPages) {
+                currentPage++;
+                updatePages();
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                updatePages();
+            }
         }
     </script>
 
