@@ -131,7 +131,7 @@
             display: block;
         }
 
-        /* 2. REAL 3D BOOK FLIP EXPERIENCE (CUSTOM FRONT) */
+        /* 2. REAL 3D BOOK FLIP EXPERIENCE WITH NEW COVER IMAGE */
         .book-experience-card {
             background: var(--bg-card);
             backdrop-filter: blur(25px);
@@ -147,7 +147,7 @@
         .book-3d-wrapper {
             position: relative;
             width: 310px;
-            height: 450px;
+            height: 460px;
             margin: 0 auto 30px;
             transform-style: preserve-3d;
             transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -167,46 +167,20 @@
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
         }
 
-        /* Custom Elegant Book Front Cover */
+        /* Front Cover with new author.jpg.jpg Image */
         .book-cover-front {
-            background: linear-gradient(145deg, #180928 0%, #090312 100%);
-            border: 2px solid var(--accent-gold);
-            padding: 40px 25px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             z-index: 2;
-            box-shadow: inset 0 0 20px rgba(245, 158, 11, 0.15), 0 20px 40px rgba(0,0,0,0.8);
+            overflow: hidden;
+            background-color: #000;
         }
 
-        .cover-front-border {
-            border: 1px solid rgba(245, 158, 11, 0.4);
+        .book-cover-front img {
             width: 100%;
             height: 100%;
-            padding: 25px 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: 6px;
-        }
-
-        .cover-front-title {
-            font-family: 'Abhaya Libre', serif;
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: var(--accent-gold);
-            text-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
-            line-height: 1.2;
-        }
-
-        .cover-front-author {
-            font-size: 0.95rem;
-            color: #ffffff;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 600;
+            object-fit: cover;
+            border-radius: 12px;
+            display: block;
         }
 
         /* Book Inside Page Preview */
@@ -347,7 +321,6 @@
             .author-name { font-size: 2.4rem; }
             .novel-title { font-size: 2.7rem; }
             .book-3d-wrapper { width: 260px; height: 390px; }
-            .cover-front-title { font-size: 2.2rem; }
             .main-card, .book-experience-card, .cover-showcase-card { padding: 30px 20px; }
         }
     </style>
@@ -367,25 +340,21 @@
 
         <!-- 1. ORIGINAL COVER IMAGE SHOWCASE -->
         <section class="cover-showcase-card">
-            <div class="cover-title-tag">✨ Official Book Cover Showcase</div>
+            <div class="cover-title-tag">✨ Official Full Cover Showcase</div>
             <div class="full-cover-wrapper">
                 <img src="author.jpg.png" alt="මන්දාරම් කතාව Full Cover Design" class="full-cover-img">
             </div>
         </section>
 
-        <!-- 2. 3D INTERACTIVE FLIP BOOK (CUSTOM FRONT) -->
+        <!-- 2. 3D INTERACTIVE FLIP BOOK (WITH NEW FRONT COVER IMAGE) -->
         <section class="book-experience-card">
             <div class="cover-title-tag">📖 Interactive 3D Reading Preview</div>
             
             <div class="book-3d-wrapper" id="flipBook" onclick="toggleBook()">
                 
-                <!-- Front Cover with "මන්දාරම් කතාව" -->
+                <!-- Front Cover with 'author.jpg.jpg' -->
                 <div class="book-cover-front">
-                    <div class="cover-front-border">
-                        <div>✨</div>
-                        <h3 class="cover-front-title">මන්දාරම්<br>කතාව</h3>
-                        <p class="cover-front-author">Kavinda D Senanayaka</p>
-                    </div>
+                    <img src="author.jpg.jpg" alt="මන්දාරම් කතාවක් Front Cover Image">
                 </div>
 
                 <!-- Inside Preview Page -->
