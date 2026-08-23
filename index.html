@@ -7,11 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-bg: #0b132b;
+            --bg-color: #0b132b;
             --card-bg: #1c2541;
-            --accent-color: #4ea8de;
-            --text-color: #f1f5f9;
-            --text-secondary: #94a3b8;
+            --accent: #4ea8de;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
         }
 
         * {
@@ -19,163 +19,281 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Abhaya Libre', serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--primary-bg);
-            color: var(--text-color);
-            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
         }
 
-        header {
-            text-align: center;
-            padding: 2rem 1rem;
-            background: linear-gradient(180deg, rgba(11,19,43,1) 0%, rgba(28,37,65,1) 100%);
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-
-        .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
-            text-align: center;
-        }
-
-        @media (min-width: 768px) {
-            .hero {
-                flex-direction: row;
-                text-align: left;
-            }
-        }
-
-        .book-img {
+        /* Navigation */
+        nav {
+            background-color: rgba(11, 19, 43, 0.9);
+            position: fixed;
+            top: 0;
             width: 100%;
-            max-width: 400px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .book-details {
-            flex: 1;
-        }
-
-        .title {
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .author {
-            font-size: 1.3rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        .poem-excerpt {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-left: 4px solid var(--accent-color);
-            border-radius: 0 8px 8px 0;
-            margin-bottom: 1.5rem;
-            font-style: italic;
-            font-size: 1.1rem;
-        }
-
-        .price-tag {
+        .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            margin-bottom: 1.5rem;
-            color: #38bdf8;
+            color: var(--accent);
         }
 
-        .btn-order {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: #000;
-            padding: 0.8rem 2rem;
-            border-radius: 30px;
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
             text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
             transition: 0.3s;
         }
 
-        .btn-order:hover {
-            background-color: #38bdf8;
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 2rem;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-img img {
+            width: 100%;
+            max-width: 380px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-content {
+            max-width: 500px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            color: var(--accent);
+            line-height: 1.2;
+        }
+
+        .hero-content h3 {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: #0b132b;
+            padding: 0.7rem 1.8rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
             transform: translateY(-2px);
         }
 
-        .contact-card {
+        /* Content Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .card {
             background-color: var(--card-bg);
             padding: 2rem;
             border-radius: 12px;
-            margin-top: 3rem;
-            text-align: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .contact-card h3 {
-            margin-bottom: 1rem;
-            color: var(--accent-color);
+        /* Poem Cards Grid */
+        .poems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
 
-        .contact-info p {
-            margin: 0.5rem 0;
-            color: var(--text-secondary);
+        .poem-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .poem-card p {
+            white-space: pre-line;
+            font-style: italic;
+        }
+
+        /* Book Info */
+        .info-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .info-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact & Form */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background-color: #0b132b;
+            color: var(--text-main);
         }
 
         footer {
             text-align: center;
             padding: 2rem;
+            background-color: #060a17;
+            color: var(--text-muted);
             font-size: 0.9rem;
-            color: var(--text-secondary);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>අසම්පූර්ණ (Asampurna)</h1>
-        <p>A Poem Collection by New Author</p>
-    </header>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">අසම්පූර්ණ</div>
+        <ul class="nav-links">
+            <li><a href="#about">පොත ගැන</a></li>
+            <li><a href="#author">කර්තෘ</a></li>
+            <li><a href="#poems">කවි රසවිඳින්න</a></li>
+            <li><a href="#contact">සම්බන්ධ වන්න</a></li>
+        </ul>
+    </nav>
 
-    <div class="container">
-        <section class="hero">
-            <!-- කවරයේ රූපය (අසම්පූර්ණ book.jpg නමින් save කරගන්න) -->
-            <img src="අසම්පූර්ණ book.jpg" alt="අසම්පූර්ණ කවි පොත" class="book-img">
-            
-            <div class="book-details">
-                <h2 class="title">අසම්පූර්ණ</h2>
-                <p class="author">Kavinda D Senanayaka</p>
-                
-                <div class="poem-excerpt">
-                    <p>"ඊයේ අහම්බෙන් ඔයාගෙ නම ඇහුණා...</p>
-                    <p>හිත රිදුණු එක පුදුමයක් නෙවෙයි</p>
-                    <p>පුදුමය වුණේ තවමත් ඒ නම ඇහුණාම</p>
-                    <p>මම හැරිලා බලන එක..."</p>
-                </div>
-
-                <div class="price-tag">මිල: රු. 950/-</div>
-
-                <a href="https://wa.me/94781675516?text=මම%20අසම්පූර්ණ%20කවි%20පොත%20මිලදී%20ගැනීමට%20කැමැත්තෙමි." class="btn-order" target="_blank">WhatsApp හරහා ඇණවුම් කරන්න</a>
-            </div>
-        </section>
-
-        <section class="contact-card">
-            <h3>විමසීම් සහ ප්‍රතිපෝෂණ (Feedback)</h3>
-            <div class="contact-info">
-                <p><strong>දුරකථන අංකය:</strong> 0781675516</p>
-                <p><strong>විද්‍යුත් තැපෑල:</strong> kavindadeshan960@gmail.com</p>
-            </div>
-        </section>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-img">
+            <img src="අසම්පූර්ණ book.jpg" alt="අසම්පූර්ණ කවි පොත">
+        </div>
+        <div class="hero-content">
+            <h1>අසම්පූර්ණ</h1>
+            <h3>Kavinda D Senanayaka</h3>
+            <p class="tagline">"ජීවිතයේ අපට හමුවන මිනිසුන්, මගහැරෙන සංකල්පා, නිහඬව දැනෙන ආදරය, වේදනාව සහ මතකයන් ඇසුරින් පොතකට ගොනු වූ එකතුවක්..."</p>
+            <a href="#poems" class="btn">කවි කියවන්න</a>
+        </div>
     </div>
+
+    <!-- About Book Section -->
+    <section id="about">
+        <h2 class="section-title">පොත පිළිබඳව</h2>
+        <div class="card">
+            <p>සමහර කතා අවසන් නොවුණත්, ඒවා අපේ හදවත තුළ කවියක් වී ඉතිරි වෙයි. "අසම්පූර්ණ" යනු අවසන් නොවූ හැඟීම්වල පද එකතුවකි.</p>
+            <ul class="info-list">
+                <li><strong>කර්තෘ:</strong> Kavinda D Senanayaka</li>
+                <li><strong>මිල:</strong> රු. 950/-</li>
+                <li><strong>ISBN:</strong> 978-624-91160-0-9</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Author Section -->
+    <section id="author">
+        <h2 class="section-title">කර්තෘ හඳුන්වාදීම</h2>
+        <div class="card">
+            <h3>Kavinda D Senanayaka</h3>
+            <p>නැවුම් පරපුරේ ලේඛකයෙකු ලෙස සිය මංගල කවි එකතුව වන "අසම්පූර්ණ" හරහා පාඨක හදවත් වෙත සමීප වන කාව්‍යමය නිර්මාණකරුවෙකි.</p>
+        </div>
+    </section>
+
+    <!-- Poems Preview Section -->
+    <section id="poems">
+        <h2 class="section-title">පොතෙන් බිඳක්</h2>
+        <div class="poems-grid">
+            <div class="poem-card">
+                <p>ඊයේ අහම්බෙන් ඔයාගෙ නම ඇහුණා...
+                හිත රිදුණු එක පුදුමයක් නෙවෙයි
+                පුදුමය වුණේ තවමත් ඒ නම ඇහුණාම
+                මම හැරිලා බලන එක...</p>
+            </div>
+            <div class="poem-card">
+                <p>නිහඬව ගෙවෙනා රාත්‍රිය පුරා
+                මතකයන් ඇවිත් සිතට තට්ටු කරයි...
+                අසම්පූර්ණ වූ පෙම් කතාවක
+                සම්පූර්ණ නොවූ පද පේළි අතර...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Feedback Section -->
+    <section id="contact">
+        <h2 class="section-title">ප්‍රතිපෝෂණ සහ විමසීම්</h2>
+        <div class="card contact-container">
+            <div>
+                <h3>සම්බන්ධ කරගැනීමට</h3>
+                <p style="margin-top: 1rem;">පොත පිළිබඳ ඔබේ අදහස්, යෝජනා හෝ විමසීම් පහත මාර්ග ඔස්සේ යොමු කරන්න.</p>
+                <br>
+                <p><strong>Phone:</strong> 0781675516</p>
+                <p><strong>Email:</strong> kavindadeshan960@gmail.com</p>
+            </div>
+            <div>
+                <h3>ඔබේ අදහස කියන්න</h3>
+                <form>
+                    <input type="text" placeholder="ඔබේ නම" required>
+                    <input type="email" placeholder="විද්‍යුත් තැපෑල" required>
+                    <textarea rows="4" placeholder="ඔබේ අදහස/Message එක මෙහි ලියන්න..." required></textarea>
+                    <button type="submit" class="btn" style="border:none; cursor:pointer;">යවන්න</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
     <footer>
         <p>&copy; 2026 Kavinda D Senanayaka. All Rights Reserved.</p>
