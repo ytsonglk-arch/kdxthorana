@@ -7,8 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0b132b;
-            --card-bg: #1c2541;
+            --bg-overlay: rgba(11, 19, 43, 0.88);
+            --card-bg: rgba(28, 37, 65, 0.82);
             --accent: #4ea8de;
             --text-main: #f1f5f9;
             --text-muted: #94a3b8;
@@ -23,30 +23,61 @@
         }
 
         body {
-            background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.7;
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* Navigation */
+        /* Responsive Blurred Background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('Asampurna.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(18px);
+            transform: scale(1.1);
+            z-index: -2;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-overlay);
+            z-index: -1;
+        }
+
+        /* Navigation Bar */
         nav {
-            background-color: rgba(11, 19, 43, 0.9);
+            background-color: rgba(11, 19, 43, 0.95);
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 1rem 2rem;
+            padding: 1rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            backdrop-filter: blur(8px);
             z-index: 100;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: bold;
             color: var(--accent);
+            letter-spacing: 1px;
         }
 
         .nav-links {
@@ -58,11 +89,28 @@
         .nav-links a {
             color: var(--text-main);
             text-decoration: none;
+            font-size: 1.05rem;
             transition: 0.3s;
         }
 
         .nav-links a:hover {
             color: var(--accent);
+        }
+
+        /* Mobile Menu Toggle Button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-main);
+            border-radius: 2px;
+            transition: 0.3s;
         }
 
         /* Hero Section */
@@ -71,38 +119,45 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 6rem 2rem 2rem;
-            gap: 3rem;
+            padding: 7rem 1.5rem 3rem;
+            gap: 2.5rem;
             flex-wrap: wrap;
+        }
+
+        .hero-img {
+            text-align: center;
         }
 
         .hero-img img {
             width: 100%;
-            max-width: 380px;
+            max-width: 340px;
             border-radius: 12px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            border: 2px solid rgba(255, 255, 255, 0.12);
         }
 
         .hero-content {
             max-width: 500px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            text-align: left;
         }
 
         .hero-content h1 {
             font-size: 3.5rem;
             color: var(--accent);
-            line-height: 1.2;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
         }
 
         .hero-content h3 {
             font-size: 1.5rem;
             color: var(--text-muted);
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
         }
 
         .tagline {
             font-size: 1.2rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
             font-style: italic;
         }
 
@@ -110,75 +165,105 @@
             display: inline-block;
             background-color: var(--accent);
             color: #0b132b;
-            padding: 0.7rem 1.8rem;
-            border-radius: 25px;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
+            font-size: 1.05rem;
             transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(78, 168, 222, 0.3);
+            text-align: center;
         }
 
         .btn:hover {
-            opacity: 0.9;
+            opacity: 0.95;
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(78, 168, 222, 0.5);
         }
 
-        /* Content Sections */
+        /* Global Section Layout */
         section {
-            padding: 5rem 2rem;
-            max-width: 1000px;
+            padding: 5rem 1.5rem;
+            max-width: 1050px;
             margin: 0 auto;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.2rem;
+            font-size: 2.3rem;
             color: var(--accent);
-            margin-bottom: 2rem;
-            position: relative;
+            margin-bottom: 2.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .card {
             background-color: var(--card-bg);
-            padding: 2rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            padding: 2.2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
         }
 
-        /* Poem Cards Grid */
+        .publisher-container {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .publisher-logo {
+            width: 65px;
+            height: 65px;
+            object-fit: contain;
+            background-color: #ffffff;
+            padding: 5px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
         .poems-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            gap: 1.8rem;
         }
 
         .poem-card {
             background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border-left: 3px solid var(--accent);
+            padding: 1.8rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+        .poem-card:hover {
+            transform: translateY(-4px);
         }
 
         .poem-card p {
             white-space: pre-line;
             font-style: italic;
+            font-size: 1.1rem;
         }
 
-        /* Book Info */
         .info-list {
             list-style: none;
             margin-top: 1rem;
         }
 
         .info-list li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.7rem;
+            font-size: 1.1rem;
         }
 
-        /* Contact & Form */
         .contact-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
         }
 
         form {
@@ -189,19 +274,81 @@
 
         input, textarea {
             width: 100%;
-            padding: 0.8rem;
-            border-radius: 6px;
-            border: 1px solid rgba(255,255,255,0.1);
-            background-color: #0b132b;
+            padding: 0.9rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background-color: rgba(11, 19, 43, 0.7);
             color: var(--text-main);
+            font-size: 1rem;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
         }
 
         footer {
             text-align: center;
-            padding: 2rem;
-            background-color: #060a17;
+            padding: 2.5rem 1rem;
+            background-color: rgba(6, 10, 23, 0.95);
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Mobile Device Optimizations */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(11, 19, 43, 0.98);
+                flex-direction: column;
+                align-items: center;
+                padding: 1.5rem 0;
+                gap: 1.2rem;
+                display: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 6rem;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .hero-img img {
+                max-width: 270px;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -210,11 +357,16 @@
     <!-- Navigation Bar -->
     <nav>
         <div class="logo">අසම්පූර්ණ</div>
-        <ul class="nav-links">
-            <li><a href="#about">පොත ගැන</a></li>
-            <li><a href="#author">කර්තෘ</a></li>
-            <li><a href="#poems">කවි රසවිඳින්න</a></li>
-            <li><a href="#contact">සම්බන්ධ වන්න</a></li>
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links" id="nav-list">
+            <li><a href="#about" onclick="toggleMenu()">පොත ගැන</a></li>
+            <li><a href="#author" onclick="toggleMenu()">කර්තෘ</a></li>
+            <li><a href="#poems" onclick="toggleMenu()">කවි රසවිඳින්න</a></li>
+            <li><a href="#contact" onclick="toggleMenu()">සම්බන්ධ වන්න</a></li>
         </ul>
     </nav>
 
@@ -235,12 +387,21 @@
     <section id="about">
         <h2 class="section-title">පොත පිළිබඳව</h2>
         <div class="card">
-            <p>සමහර කතා අවසන් නොවුණත්, ඒවා අපේ හදවත තුළ කවියක් වී ඉතිරි වෙයි. "අසම්පූර්ණ" යනු අවසන් නොවූ හැඟීම්වල පද එකතුවකි.</p>
+            <p style="font-size: 1.15rem; margin-bottom: 1rem;">සමහර කතා අවසන් නොවුණත්, ඒවා අපේ හදවත තුළ කවියක් වී ඉතිරි වෙයි. "අසම්පූර්ණ" යනු අවසන් නොවූ හැඟීම්වල පද එකතුවකි.</p>
             <ul class="info-list">
                 <li><strong>කර්තෘ:</strong> Kavinda D Senanayaka</li>
                 <li><strong>මිල:</strong> රු. 950/-</li>
                 <li><strong>ISBN:</strong> 978-624-91160-0-9</li>
             </ul>
+
+            <!-- Publisher Section -->
+            <div class="publisher-container">
+                <img src="publisher-logo.png" alt="ප්‍රකාශන ලාංඡනය" class="publisher-logo">
+                <div>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">ප්‍රකාශනය</span>
+                    <h4 style="color: var(--accent); font-size: 1.05rem;">ප්‍රකාශන ආයතනය</h4>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -249,11 +410,11 @@
         <h2 class="section-title">කර්තෘ හඳුන්වාදීම</h2>
         <div class="card">
             <h3>Kavinda D Senanayaka</h3>
-            <p>නැවුම් පරපුරේ ලේඛකයෙකු ලෙස සිය මංගල කවි එකතුව වන "අසම්පූර්ණ" හරහා පාඨක හදවත් වෙත සමීප වන කාව්‍යමය නිර්මාණකරුවෙකි.</p>
+            <p style="margin-top: 1rem; font-size: 1.05rem;">නැවුම් පරපුරේ ලේඛකයෙකු ලෙස සිය මංගල කවි එකතුව වන "අසම්පූර්ණ" හරහා පාඨක හදවත් වෙත සමීප වන කාව්‍යමය නිර්මාණකරුවෙකි.</p>
         </div>
     </section>
 
-    <!-- Poems Preview Section -->
+    <!-- Poems Section -->
     <section id="poems">
         <h2 class="section-title">පොතෙන් බිඳක්</h2>
         <div class="poems-grid">
@@ -269,10 +430,16 @@
                 අසම්පූර්ණ වූ පෙම් කතාවක
                 සම්පූර්ණ නොවූ පද පේළි අතර...</p>
             </div>
+            <div class="poem-card">
+                <p>සමහර මතකයන් තියෙනවා
+                කවදාවත් අමතක නොවන...
+                සමහර හීන තියෙනවා
+                කවදාවත් සැබෑ නොවන...</p>
+            </div>
         </div>
     </section>
 
-    <!-- Contact & Feedback Section -->
+    <!-- Contact Section -->
     <section id="contact">
         <h2 class="section-title">ප්‍රතිපෝෂණ සහ විමසීම්</h2>
         <div class="card contact-container">
@@ -282,6 +449,8 @@
                 <br>
                 <p><strong>Phone:</strong> 0781675516</p>
                 <p><strong>Email:</strong> kavindadeshan960@gmail.com</p>
+                <br>
+                <a href="https://wa.me/94781675516?text=මම%20අසම්පූර්ණ%20කවි%20පොත%20මිලදී%20ගැනීමට%20කැමැත්තෙමි." class="btn" target="_blank" style="margin-top: 0.5rem; display: inline-block; width: 100%;">WhatsApp හරහා මිලදී ගන්න</a>
             </div>
             <div>
                 <h3>ඔබේ අදහස කියන්න</h3>
@@ -289,7 +458,7 @@
                     <input type="text" placeholder="ඔබේ නම" required>
                     <input type="email" placeholder="විද්‍යුත් තැපෑල" required>
                     <textarea rows="4" placeholder="ඔබේ අදහස/Message එක මෙහි ලියන්න..." required></textarea>
-                    <button type="submit" class="btn" style="border:none; cursor:pointer;">යවන්න</button>
+                    <button type="submit" class="btn" style="border:none; cursor:pointer; width: 100%;">යවන්න</button>
                 </form>
             </div>
         </div>
@@ -299,5 +468,20 @@
         <p>&copy; 2026 Kavinda D Senanayaka. All Rights Reserved.</p>
     </footer>
 
+    <!-- Small Script for Mobile Menu Toggle -->
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+
+        mobileMenu.addEventListener('click', () => {
+            navList.classList.toggle('active');
+        });
+
+        function toggleMenu() {
+            if (window.innerWidth <= 768) {
+                navList.classList.remove('active');
+            }
+        }
+    </script>
 </body>
 </html>
