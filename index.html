@@ -3,572 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kavinda D Senanayaka | Official Author Page</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
+    <title>අසම්පූර්ණ - Kavinda D Senanayaka</title>
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #06020c;
-            --bg-card: rgba(18, 10, 31, 0.75);
-            --accent-gold: #fbbf24;
-            --accent-pink: #f43f5e;
-            --accent-glow: rgba(244, 63, 94, 0.35);
-            --text-main: #fff1f2;
-            --text-muted: #fca5a5;
-            --text-body: #ffe4e6;
-            --border-light: rgba(244, 63, 94, 0.25);
+            --primary-bg: #0b132b;
+            --card-bg: #1c2541;
+            --accent-color: #4ea8de;
+            --text-color: #f1f5f9;
+            --text-secondary: #94a3b8;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Abhaya Libre', serif;
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-main);
-            line-height: 1.8;
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
         }
 
-        .bg-background-image {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('authors.jpg.png');
-            background-size: cover;
-            background-position: center;
-            filter: blur(50px) brightness(0.18);
-            transform: scale(1.1);
-            z-index: -1;
+        header {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: linear-gradient(180deg, rgba(11,19,43,1) 0%, rgba(28,37,65,1) 100%);
         }
 
         .container {
-            max-width: 1050px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 50px 20px;
+            padding: 2rem 1rem;
         }
 
-        /* Header Section */
-        .hero-header {
-            text-align: center;
-            padding: 30px 0 40px;
-        }
-
-        .author-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 24px;
-            background: linear-gradient(135deg, rgba(244, 63, 94, 0.2), rgba(251, 191, 36, 0.15));
-            border: 1px solid var(--border-light);
-            border-radius: 50px;
-            color: var(--accent-pink);
-            font-size: 0.85rem;
-            font-weight: 800;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-
-        .author-name {
-            font-size: 3.8rem;
-            font-weight: 800;
-            letter-spacing: 2px;
-            background: linear-gradient(135deg, #ffffff 30%, #fca5a5 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
-        }
-
-        .author-tagline {
-            color: var(--text-muted);
-            font-size: 1.25rem;
-            font-weight: 400;
-        }
-
-        .glass-card {
-            background: var(--bg-card);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid var(--border-light);
-            border-radius: 36px;
-            padding: 50px;
-            text-align: center;
-            margin-bottom: 45px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
-        }
-
-        .section-tag {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--accent-gold);
-            text-transform: uppercase;
-            letter-spacing: 2.5px;
-            margin-bottom: 30px;
-            display: inline-block;
-        }
-
-        /* 1. FULL COVER DESIGN SHOWCASE */
-        .full-cover-wrapper {
-            display: inline-block;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95), 0 0 40px var(--accent-glow);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .full-cover-img {
-            width: 100%;
-            max-width: 920px;
-            height: auto;
-            display: block;
-        }
-
-        /* 2. MULTI-PAGE 3D BOOK STYLING */
-        .book-container-3d {
-            perspective: 1500px;
+        .hero {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 20px 0 30px;
-        }
-
-        .book-3d {
-            position: relative;
-            width: 320px;
-            height: 480px;
-            transform-style: preserve-3d;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
-            border-radius: 12px;
-        }
-
-        /* Book Cover (author.jpg.png) */
-        .book-cover {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 12px;
-            z-index: 20;
-            transform-origin: left;
-            transition: transform 0.8s cubic-bezier(0.15, 1, 0.3, 1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            overflow: hidden;
-            background: #10051d;
-            cursor: pointer;
-        }
-
-        .book-cover img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .book-cover.opened {
-            transform: rotateY(-160deg);
-            z-index: 1;
-        }
-
-        /* Inside Pages */
-        .book-page-inside {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #fffdfa 0%, #f4eae1 100%);
-            color: #2a1810;
-            padding: 35px 25px;
-            border-radius: 12px;
-            border: 2px solid #dfcfc0;
-            box-shadow: inset 18px 0 35px rgba(0,0,0,0.12);
-            display: none;
             flex-direction: column;
-            justify-content: space-between;
-            text-align: justify;
-        }
-
-        .book-page-inside.active {
-            display: flex;
-        }
-
-        .book-page-inside h4 {
-            font-family: 'Abhaya Libre', serif;
-            font-size: 1.6rem;
-            color: #8b0000;
-            text-align: center;
-            border-bottom: 2px solid rgba(139, 0, 0, 0.2);
-            padding-bottom: 6px;
-        }
-
-        .book-page-content {
-            font-family: 'Abhaya Libre', serif;
-            font-size: 1.15rem;
-            line-height: 1.8;
-            color: #1d1008;
-            flex-grow: 1;
-            margin-top: 15px;
-        }
-
-        .page-number-tag {
-            text-align: center;
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: #8b0000;
-            margin-top: 10px;
-        }
-
-        /* Book Navigation Controls */
-        .book-controls {
-            display: flex;
-            justify-content: center;
             align-items: center;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 2rem;
+            text-align: center;
         }
 
-        .btn-page {
-            padding: 12px 26px;
-            background: linear-gradient(135deg, rgba(244, 63, 94, 0.25), rgba(244, 63, 94, 0.1));
-            border: 1.5px solid var(--accent-pink);
-            color: #fff;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        @media (min-width: 768px) {
+            .hero {
+                flex-direction: row;
+                text-align: left;
+            }
         }
 
-        .btn-page:hover:not(:disabled) {
-            background: var(--accent-pink);
+        .book-img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .book-details {
+            flex: 1;
+        }
+
+        .title {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .author {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .poem-excerpt {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        .price-tag {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: #38bdf8;
+        }
+
+        .btn-order {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #000;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        .btn-order:hover {
+            background-color: #38bdf8;
             transform: translateY(-2px);
         }
 
-        .btn-page:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .page-indicator {
-            color: var(--accent-gold);
-            font-weight: 700;
-            font-size: 1.05rem;
-        }
-
-        /* SYNOPSIS SECTION */
-        .novel-title {
-            font-family: 'Abhaya Libre', serif;
-            font-size: 4rem;
-            font-weight: 800;
-            color: #ffffff;
+        .contact-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 3rem;
             text-align: center;
-            line-height: 1.1;
-            margin-bottom: 15px;
         }
 
-        .quote-box {
-            font-family: 'Abhaya Libre', serif;
-            font-size: 1.6rem;
-            color: var(--accent-gold);
-            font-style: italic;
+        .contact-card h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .contact-info p {
+            margin: 0.5rem 0;
+            color: var(--text-secondary);
+        }
+
+        footer {
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .synopsis-text {
-            font-family: 'Abhaya Libre', serif;
-            font-size: 1.45rem;
-            color: var(--text-body);
-            text-align: justify;
-            margin-bottom: 26px;
-            line-height: 2.0;
-        }
-
-        .synopsis-text strong {
-            color: var(--accent-pink);
-        }
-
-        /* FOOTER */
-        .footer-card {
-            text-align: center;
-            padding: 50px 30px;
-            background: rgba(18, 10, 31, 0.85);
-            backdrop-filter: blur(20px);
-            border-radius: 32px;
-            border: 1px solid var(--border-light);
-        }
-
-        .contact-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 22px;
-            padding: 20px 48px;
-            background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
-            color: #ffffff;
-            font-weight: 800;
-            font-size: 1.1rem;
-            text-decoration: none;
-            border-radius: 50px;
-            box-shadow: 0 12px 35px rgba(244, 63, 94, 0.45);
-            transition: all 0.3s ease;
-        }
-
-        .contact-btn:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 18px 45px rgba(244, 63, 94, 0.65);
-        }
-
-        .copyright {
-            margin-top: 30px;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        @media (max-width: 768px) {
-            .author-name { font-size: 2.6rem; }
-            .novel-title { font-size: 2.8rem; }
-            .book-3d { width: 270px; height: 420px; }
-            .glass-card { padding: 30px 20px; }
-            .synopsis-text { font-size: 1.25rem; }
+            padding: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-background-image"></div>
+    <header>
+        <h1>අසම්පූර්ණ (Asampurna)</h1>
+        <p>A Poem Collection by New Author</p>
+    </header>
 
     <div class="container">
-        
-        <!-- Header -->
-        <header class="hero-header">
-            <span class="author-badge">✨ Official Author Page</span>
-            <h1 class="author-name">KAVINDA D SENANAYAKA</h1>
-            <p class="author-tagline">Author of "Mandaram Kathavak"</p>
-        </header>
-
-        <!-- 1. FULL COVER DESIGN SHOWCASE -->
-        <section class="glass-card">
-            <div class="section-tag">🎨 Official Full Cover Design</div>
-            <div class="full-cover-wrapper">
-                <img src="authors.jpg.png" alt="මන්දාරම් කතාවක් Full Cover Art" class="full-cover-img">
-            </div>
-        </section>
-
-        <!-- 2. 10-PAGE 3D INTERACTIVE FLIP BOOK -->
-        <section class="glass-card">
-            <div class="section-tag">📖 Interactive 10-Page Book Reading Preview</div>
+        <section class="hero">
+            <!-- කවරයේ රූපය (අසම්පූර්ණ book.jpg නමින් save කරගන්න) -->
+            <img src="අසම්පූර්ණ book.jpg" alt="අසම්පූර්ණ කවි පොත" class="book-img">
             
-            <div class="book-container-3d">
-                <div class="book-3d">
-                    
-                    <!-- Cover Page -->
-                    <div class="book-cover" id="bookCover" onclick="openBook()">
-                        <img src="author.jpg.png" alt="මන්දාරම් කතාවක් Book Front Cover">
-                    </div>
-
-                    <!-- Page 1 -->
-                    <div class="book-page-inside active" id="page-1">
-                        <h4>පිටුව 01 - </h4>
-                        <div class="book-page-content">
-                            "දන්නවද නිම්නා  ඔයාව මට හම්බුනාට පස්සෙ මට හිතුනා ජිවිතේ කියන්නෙ විදින්න ඔනි ලස්සන කවියක් කියලා දේශ් නිම්නාගෙ දෑත් අල්ලාගනිමින් කිවේය.ඔව් දේශ් මගේ අනාගතය කියන රූපයේ ප්‍රදාන රූපය ඔයා දේශ් නිම්නා දේශ් ගේ කර මතට හිස තියාගනිමින් පැවසීය ..."
-                        </div>
-                        <div class="page-number-tag">- Page 01 -</div>
-                    </div>
-
-                    <!-- Page 2 -->
-                    <div class="book-page-inside" id="page-2">
-                        <h4>පිටුව 02 - </h4>
-                        <div class="book-page-content">
-                            ""සරසවිය කියන්නේ නන්නාඳුනන මිනිස්සු හදවතින්ම සහෝදරයෝ වෙන මායාවී බිමක්. ලේ නෑකම්වලට වඩා ආත්මීය බැඳීම් ලියලන්නේ, එකට බත් පත බෙදාගන්න, එකට කඳුළු හංගන් හිනාවෙන්න පුළුවන් තැනක්"
-                        </div>
-                        <div class="page-number-tag">- Page 02 -</div>
-                    </div>
-
-                    <!-- Page 3 -->
-                    <div class="book-page-inside" id="page-3">
-                        <h4>පිටුව 03 - </h4>
-                        <div class="book-page-content">
-                            ""සරසවිය ඇතුළේ ජීවිතය කියන්නේ වචනවලින් ලියන්න බැරි තරම් නිදහස් කවියක්. ලෝවර් ලේන් එක දිගේ ඇදී එන හන්තාන මීදුම අස්සේ, හැන්දෑවට පත්තුවෙන ලාම්පු කණුවල කහ ආලෝකය යට, අපේ තාරුණ්‍යයේ දඟකාරකම් වගේම අනාගතය ගැන තිබුණු අහිංසක බලාපොරොත්තුත්"
-                        </div>
-                        <div class="page-number-tag">- Page 03 -</div>
-                    </div>
-
-                    <!-- Page 4 -->
-                    <div class="book-page-inside" id="page-4">
-                        <h4>පිටුව 04 -</h4>
-                        <div class="book-page-content">
-                            "නිම්නා ප්‍රථම වතාවට පුස්තකාලය අසලදී මට මුණගැසුණු මොහොතේ, මුළු ලෝකයම මොහොතකට නතර වූවාක් මෙන් මට දැනුණි. ඇගේ මන්දහාසය හදවතේ ගැඹුරුම තැනක සදාකාලිකව සටහන් විය."
-                        </div>
-                        <div class="page-number-tag">- Page 04 -</div>
-                    </div>
-
-                    <!-- Page 5 -->
-                    <div class="book-page-inside" id="page-5">
-                        <h4>පිටුව 05 -</h4>
-                        <div class="book-page-content">
-                            "හන්තාන කඳු මුදුනට හිරු බැස යන මොහොතේ, අප දෙදෙනා අතර ඇති වූ නිහඬ සංවාදය වචන දහසකට වඩා ගැඹුරු විය. 'අපි කවදාවත් වෙන් නොවී ඉඳිමු,' ඇය හිමින් කීවාය."
-                        </div>
-                        <div class="page-number-tag">- Page 05 -</div>
-                    </div>
-
-                    <!-- Page 6 -->
-                    <div class="book-page-inside" id="page-6">
-                        <h4>පිටුව 06 - </h4>
-                        <div class="book-page-content">
-                            "සමහර ආදර කතා තියෙනවා වචනවලින් ලියන්නම බැරි... ඒවා ලියවෙන්නේ හන්තානෙන් එන හීන් මීදුම අස්සේ,  මහවැලි නදියේ රිද්මය මැද උපන් ඒ මිතුදම, අද පෙරාදෙණියේ රොබරෝසියා මල් වසන්තය මැද ලස්සනම ලස්සන ආදර කතාවක් වෙලා මුළු සරසවිය පුරාම සුවඳ විහිදුවන්න පටන් ගත්තා."."
-                        </div>
-                        <div class="page-number-tag">- Page 06 -</div>
-                    </div>
-
-                    <!-- Page 7 -->
-                    <div class="book-page-inside" id="page-7">
-                        <h4>පිටුව 07 - </h4>
-                        <div class="book-page-content">
-                            "නමුත් සොබාදහමේ නියමයන් වෙනස් කිරීම අපට කළ නොහැක. කිසිවෙකු නොසිතූ මොහොතක කඩා වැටුණු ඒ අඳුරු ආරංචිය, අපගේ වසන්තය එකී මෙකී නොලබා අළු කර දැමීමට සමත් විය."
-                        </div>
-                        <div class="page-number-tag">- Page 07 -</div>
-                    </div>
-
-                    <!-- Page 8 -->
-                    <div class="book-page-inside" id="page-8">
-                        <h4>පිටුව 08 - </h4>
-                        <div class="book-page-content">
-                            "ජීවිතයේ සුන්දරම දේවල් පවා සැමදා නොපවතින බව පසක් කරගැනීමට සිදුවීම තරම් තවත් වේදනාවක් නොමැත. දෛවයේ කුරිරු සෙල්ලම හමුවේ අපට ඉතිරි වූයේ මතකයන් සමුදායක් පමණි."
-                        </div>
-                        <div class="page-number-tag">- Page 08 -</div>
-                    </div>
-
-                    <!-- Page 9 -->
-                    <div class="book-page-inside" id="page-9">
-                        <h4>පිටුව 09 - </h4>
-                        <div class="book-page-content">
-                            "කාලය ගෙවී ගියද, හන්තාන කඳු වැටිය තවමත් එලෙසමය. මන්දාරම් වැස්ස වැටෙන සෑම මොහොතකම ඇගේ සුවඳ මට නැවත නැවතත් දැනෙන්නේ සදාකාලික මතක සටහනක් ලෙසිනි."
-                        </div>
-                        <div class="page-number-tag">- Page 09 -</div>
-                    </div>
-
-                    <!-- Page 10 -->
-                    <div class="book-page-inside" id="page-10">
-                        <h4>පිටුව 10 -</h4>
-                        <div class="book-page-content">
-                            "සෑම කතාවකටම අවසානයක් ඇතත්, සැබෑ ආදරයට අවසානයක් නැත. 'මන්දාරම් කතාව' යනු හදවත් තුළ සදාකාලිකව ජීවත් වන අපගේ ජීවන සෙවනැල්ලයි."
-                        </div>
-                        <div class="page-number-tag">- Page 10 -</div>
-                    </div>
-
+            <div class="book-details">
+                <h2 class="title">අසම්පූර්ණ</h2>
+                <p class="author">Kavinda D Senanayaka</p>
+                
+                <div class="poem-excerpt">
+                    <p>"ඊයේ අහම්බෙන් ඔයාගෙ නම ඇහුණා...</p>
+                    <p>හිත රිදුණු එක පුදුමයක් නෙවෙයි</p>
+                    <p>පුදුමය වුණේ තවමත් ඒ නම ඇහුණාම</p>
+                    <p>මම හැරිලා බලන එක..."</p>
                 </div>
-            </div>
 
-            <!-- Page Navigation Controls -->
-            <div class="book-controls">
-                <button class="btn-page" id="prevBtn" onclick="prevPage()" disabled>⬅ පෙර පිටුව</button>
-                <span class="page-indicator" id="pageIndicator">පිටුව: 01 / 10</span>
-                <button class="btn-page" id="nextBtn" onclick="nextPage()">ඊළඟ පිටුව ➡</button>
+                <div class="price-tag">මිල: රු. 950/-</div>
+
+                <a href="https://wa.me/94781675516?text=මම%20අසම්පූර්ණ%20කවි%20පොත%20මිලදී%20ගැනීමට%20කැමැත්තෙමි." class="btn-order" target="_blank">WhatsApp හරහා ඇණවුම් කරන්න</a>
             </div>
-            
-            <p style="margin-top: 15px; color: var(--text-muted); font-size: 0.85rem;">💡 පොත මත ක්ලික් කර කවරය විවෘත කරන්න හෝ වසන්න.</p>
         </section>
 
-        <!-- SYNOPSIS SECTION -->
-        <main class="glass-card" style="text-align: left;">
-            <h2 class="novel-title">මන්දාරම් කතාවක්</h2>
-            <p class="quote-box">"හන්තාන අහස යට ලියැවුණු, සරසවි වසන්තයක සදාකාලික මතකය..."</p>
-
-            <p class="synopsis-text">
-                පෙරාදෙණිය විශ්වවිද්‍යාලයේ ඓතිහාසික සරසවි බිම, හුදෙක් උපාධියක් පිරිනමන තක්සලාවක් පමණක් නොවේ. එය ජීවිතය, තාරුණ්‍යය, ප්‍රේමය සහ ආත්මීය සහෝදරත්වය කියාදෙන තෝතැන්නකි.
-            </p>
-
-            <p class="synopsis-text">
-                රැග් සමයේ කටුක බව මැද, සුප්‍රසිද්ධ අක්බාර් පාලම මතදී දේශ්ට මුණගැසෙන සවින් සහ කපී ඔහුගේ සදාකාලික සහෝදරයන් බවට පත් වෙති. මීදුම පිරුණු ලෝවර් ලේන් දිගේ ඇවිද ගිය ඒ සුන්දර හැන්දෑවන් ඔවුන්ගේ තාරුණ්‍යය බලාපොරොත්තු වලින් පුරවාලයි.
-            </p>
-
-            <p class="synopsis-text">
-                මේ සුන්දර මිත්‍රත්වයේ රිද්මය මැදට, වසන්තයේ පිපුණු කඳුරු මලක් මෙන් නිම්නා පැමිණෙන්නේ දේශ්ගේ හදවතේ ආදරයේ නොමැකෙන සිතුවම් අඳිමිනි. හන්තාන කඳු මුදුනේදී ඔවුන් හුවමාරු කරගත් රහස් පොරොන්දු, නුවර වැව රවුමේ සුදු වලාකුළු බැම්ම අසල මැවූ සිහින, ඔවුන්ගේ ප්‍රේමයට සදාකාලිකත්වයේ මුද්‍රාව තබයි.
-            </p>
-
-            <p class="synopsis-text">
-                නමුත්, සොබාදහම සැමවිටම කරුණාවන්ත නොවේ. ජීවිතයේ සුන්දරම වසන්තය උදාවෙද්දී කිසිවෙකු නොසිතූ අයුරින් පැමිණෙන කුරිරු දෛවයේ කුණාටුවක් ඔවුන්ගේ මුළු ලෝකයම උඩුයටිකුරු කරයි.
-            </p>
-
-            <p class="synopsis-text">
-                ආදරයේ අතිශය සුන්දර සුසංයෝගයත්, ජීවිතයේ අනිත්‍යතාව පිළිබඳ පරම සත්‍යයන් අපූරුවට පසක් කරලන, හදවතේ ගැඹුරුම තැන් ස්පර්ශ කරන සංවේදී ආදර අන්දරය — <strong>"මන්දාරම් කතාවක්"</strong>.
-            </p>
-        </main>
-
-        <!-- FOOTER & ORDER BUTTON -->
-        <footer class="footer-card">
-            <h3 style="font-size: 1.6rem; color: #fff; margin-bottom: 8px;"> / කර්තෘ සම්බන්ධ කරගැනීමට</h3>
-            <p style="color: var(--text-muted); font-size: 1rem;">ප්‍රකාශනය සදහා.</p>
-            
-            <div>
-                <a href="mailto:Kavindadeshan960@gmail.com" class="contact-btn">
-                    ✉ Email හරහා සම්බන්ධ වන්න
-                </a>
+        <section class="contact-card">
+            <h3>විමසීම් සහ ප්‍රතිපෝෂණ (Feedback)</h3>
+            <div class="contact-info">
+                <p><strong>දුරකථන අංකය:</strong> 0781675516</p>
+                <p><strong>විද්‍යුත් තැපෑල:</strong> kavindadeshan960@gmail.com</p>
             </div>
-
-            <p class="copyright">&copy; 2026 KAVINDA D SENANAYAKA. All Rights Reserved.</p>
-        </footer>
-
+        </section>
     </div>
 
-    <script>
-        let currentPage = 1;
-        const totalPages = 10;
-        let isOpened = false;
-
-        function openBook() {
-            const cover = document.getElementById('bookCover');
-            isOpened = !isOpened;
-            if (isOpened) {
-                cover.classList.add('opened');
-            } else {
-                cover.classList.remove('opened');
-            }
-        }
-
-        function updatePages() {
-            for (let i = 1; i <= totalPages; i++) {
-                const page = document.getElementById(`page-${i}`);
-                if (i === currentPage) {
-                    page.classList.add('active');
-                } else {
-                    page.classList.remove('active');
-                }
-            }
-
-            document.getElementById('pageIndicator').innerText = `පිටුව: ${currentPage < 10 ? '0' + currentPage : currentPage} / ${totalPages}`;
-            document.getElementById('prevBtn').disabled = (currentPage === 1);
-            document.getElementById('nextBtn').disabled = (currentPage === totalPages);
-        }
-
-        function nextPage() {
-            if (!isOpened) openBook();
-            if (currentPage < totalPages) {
-                currentPage++;
-                updatePages();
-            }
-        }
-
-        function prevPage() {
-            if (currentPage > 1) {
-                currentPage--;
-                updatePages();
-            }
-        }
-    </script>
+    <footer>
+        <p>&copy; 2026 Kavinda D Senanayaka. All Rights Reserved.</p>
+    </footer>
 
 </body>
 </html>
